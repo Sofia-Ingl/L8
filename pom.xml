@@ -48,17 +48,17 @@
                     </execution>
 
                     <execution>
-                        <id>client-build</id>
+                        <id>oldClient-build</id>
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>client.Client</mainClass>
+                                    <mainClass>oldClient.OldClient</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
                                 <descriptorRef>jar-with-dependencies</descriptorRef>
                             </descriptorRefs>
-                            <finalName>client</finalName>
+                            <finalName>oldClient</finalName>
                         </configuration>
                         <phase>package</phase>
                         <goals>
