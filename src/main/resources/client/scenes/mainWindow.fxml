@@ -5,11 +5,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.MainSceneController">
+<AnchorPane prefHeight="700.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.MainSceneController">
     <children>
-        <VBox prefHeight="648.0" prefWidth="884.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox prefHeight="700.0" prefWidth="925.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <GridPane prefHeight="46.0" prefWidth="800.0" style="-fx-background-color: #ffd8ad;">
+                <GridPane prefHeight="50.0" prefWidth="925.0" style="-fx-background-color: #ffd8ad;">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -20,7 +20,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <ComboBox prefHeight="26.0" prefWidth="176.0" style="-fx-border-width: 1; -fx-border-color: #777571; -fx-background-color: #FCF8F2;" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+                        <ComboBox prefHeight="25.0" prefWidth="175.0" style="-fx-border-width: 1; -fx-border-color: #777571; -fx-background-color: #FCF8F2;" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
                         <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Update" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="173.0" style="-fx-border-width: 2; -fx-border-color: #777571; -fx-background-color: #FCF8F2;" text="User" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER">
                             <font>
@@ -29,11 +29,11 @@
                         </Label>
                     </children>
                 </GridPane>
-                <TabPane prefHeight="457.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+                <TabPane prefHeight="500.0" prefWidth="925.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                         <Tab text="Movie Table">
                             <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="449.0" prefWidth="800.0" />
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="421.0" prefWidth="925.0" />
                             </content>
                         </Tab>
                         <Tab text="Visualization">
@@ -43,12 +43,12 @@
                         </Tab>
                     </tabs>
                 </TabPane>
-                <Separator prefHeight="0.0" prefWidth="800.0" />
-                <FlowPane hgap="10.0" prefHeight="76.0" prefWidth="739.0" vgap="10.0">
+                <Separator prefHeight="14.0" prefWidth="925.0" />
+                <FlowPane alignment="CENTER" hgap="10.0" prefHeight="75.0" prefWidth="925.0" style="-fx-background-color: #ffd8ad;" vgap="10.0">
                     <children>
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Button" />
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Button" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Button" />
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Button" />
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Button" />
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Button" />
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Button" />
