@@ -1,6 +1,7 @@
 package client;
 
 import client.controllers.LoginSceneController;
+import client.controllers.MainSceneController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,7 +38,8 @@ public class FXApp extends Application {
         client = new Client(validatedHost, validatedPort);
         try {
             client.setConnectionWithServer();
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+        }
     }
 
 
@@ -53,6 +55,7 @@ public class FXApp extends Application {
         Scene loginWindowScene = new Scene(loginWindowRootNode);
         LoginSceneController loginWindowController = loginWindowLoader.getController();
         loginWindowController.setClient(client);
+        loginWindowController.setApp(this);
         loginWindowController.playAnimation();
 
         primaryStage.setScene(loginWindowScene);
@@ -66,6 +69,23 @@ public class FXApp extends Application {
         Image image = new Image(iconStream);
         primaryStage.getIcons().add(image);
     }
+
+
+    public void setMainScene() {
+        FXMLLoader mainWindowLoader = new FXMLLoader();
+        mainWindowLoader.setLocation(getClass().getResource("/client/scenes/MainWindow.fxml"));
+        Parent mainWindowRootNode;
+        try {
+            mainWindowRootNode = mainWindowLoader.load();
+            Scene mainWindowScene = new Scene(mainWindowRootNode);
+            MainSceneController mainWindowController = mainWindowLoader.getController();
+            primaryStage.setScene(mainWindowScene);
+            primaryStage.setResizable(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private static boolean validateAndSetHostAndPort(String[] args) {
         try {

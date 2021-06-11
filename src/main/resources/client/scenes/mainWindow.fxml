@@ -5,11 +5,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.MainSceneController">
+<AnchorPane prefHeight="700.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/8.0.292" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.MainSceneController">
     <children>
         <VBox prefHeight="700.0" prefWidth="1120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <GridPane prefHeight="50.0" prefWidth="1120.0" style="-fx-background-color: #ffd8ad;">
+                <GridPane fx:id="topPanel" prefHeight="50.0" prefWidth="1120.0" style="-fx-background-color: #ffd8ad;">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -21,69 +21,79 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <ComboBox prefHeight="25.0" prefWidth="175.0" style="-fx-border-width: 1; -fx-border-color: #777571; -fx-background-color: #FCF8F2;" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
-                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Update" GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="173.0" style="-fx-border-width: 2; -fx-border-color: #777571; -fx-background-color: #FCF8F2;" text="User" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                        <ComboBox fx:id="languageChoiceBox" prefHeight="25.0" prefWidth="175.0" style="-fx-border-width: 1; -fx-border-color: #777571; -fx-background-color: #FCF8F2;" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
+                        <Button fx:id="refreshButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Refresh" GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
+                        <Label fx:id="usernameLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="173.0" style="-fx-border-width: 2; -fx-border-color: #777571; -fx-background-color: #FCF8F2;" text="User" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                             <font>
                                 <Font name="Calibri Light" size="18.0" />
                             </font>
                         </Label>
                     </children>
                 </GridPane>
-                <TabPane prefHeight="500.0" prefWidth="1120.0" tabClosingPolicy="UNAVAILABLE">
+                <TabPane prefHeight="550.0" prefWidth="1120.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                     <tabs>
-                        <Tab text="Movie Table">
+                        <Tab fx:id="tableTab" text="Movie Table">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="1120.0">
                                     <children>
-                                        <TableView prefHeight="500.0" prefWidth="1120.0">
+                                        <TableView fx:id="movieTable" prefHeight="516.0" prefWidth="1120.0"
+                                                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columns>
-                                                <TableColumn text="MovieId" />
-                                                <TableColumn text="MovieName" />
-                                                <TableColumn text="XCoordinate" />
-                                                <TableColumn text="YCoordinate" />
-                                                <TableColumn text="CreationDate" />
-                                                <TableColumn text="Oscars" />
-                                                <TableColumn text="GoldenPalms" />
-                                                <TableColumn text="TagLine" />
-                                                <TableColumn text="Genre" />
-                                                <TableColumn text="Screenwriter" />
-                                                <TableColumn text="ScrHeight" />
-                                                <TableColumn text="ScrEyeColor" />
-                                                <TableColumn text="ScrNationality" />
-                                                <TableColumn text="Owner" />
+                                                <TableColumn fx:id="idColumn" text="MovieId" />
+                                                <TableColumn fx:id="nameColumn" text="MovieName" />
+                                                <TableColumn fx:id="xColumn" text="XCoordinate" />
+                                                <TableColumn fx:id="yColumn" text="YCoordinate" />
+                                                <TableColumn fx:id="creationDateColumn" text="CreationDate" />
+                                                <TableColumn fx:id="oscarsColumn" text="Oscars" />
+                                                <TableColumn fx:id="gPalmsColumn" text="GoldenPalms" />
+                                                <TableColumn fx:id="taglineColumn" text="TagLine" />
+                                                <TableColumn fx:id="genreColumn" text="Genre" />
+                                                <TableColumn fx:id="scrNameColumn" text="Screenwriter" />
+                                                <TableColumn fx:id="scrHeightColumn" text="ScrHeight" />
+                                                <TableColumn fx:id="eyeColorColumn" text="ScrEyeColor" />
+                                                <TableColumn fx:id="nationalityColumn" text="ScrNationality" />
+                                                <TableColumn fx:id="ownerColumn" text="Owner" />
                                             </columns>
+                                            <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                            </columnResizePolicy>
                                         </TableView>
                                     </children>
                                 </AnchorPane>
                             </content>
+
                         </Tab>
-                        <Tab text="Visualization">
+                        <Tab fx:id="visualTab" text="Visualization">
                             <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #FFF4E3, linear-gradient(from 0.5px 0.0px to 10.5px  0.0px, repeat, grey 5%, transparent 5%),linear-gradient(from 0.0px 0.5px to  0.0px 10.5px, repeat, grey 5%, transparent 5%);">
+                                </AnchorPane>
                             </content>
                         </Tab>
                     </tabs>
                 </TabPane>
-                <Separator prefHeight="15.0" prefWidth="1120.0" />
+                <Separator prefHeight="15.0" prefWidth="1120.0" style="-fx-background-color: #D9C196;" />
                 <FlowPane alignment="CENTER" hgap="10.0" prefHeight="75.0" prefWidth="1120.0" style="-fx-background-color: #ffd8ad;" vgap="10.0">
                     <children>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Add" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="AddIfMax" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Clear" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="ExecuteScript" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="GPalmsFilter" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Help" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="History" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Info" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="RemoveByScreenwriter" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Remove" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="RemoveGreater" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Update" />
+                        <Button fx:id="addButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Add" />
+                        <Button fx:id="addIfMaxButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="AddIfMax" />
+                        <Button fx:id="clearButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Clear" />
+                        <Button fx:id="executeScriptButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="ExecuteScript" />
+                        <Button fx:id="gPalmsFilterButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="GPalmsFilter" />
+                        <Button fx:id="helpButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Help" />
+                        <Button fx:id="historyButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="History" />
+                        <Button fx:id="infoButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Info" />
+                        <Button fx:id="removeByScreenwriterButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="RemoveByScreenwriter" />
+                        <Button fx:id="removeByIdButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Remove" />
+                        <Button fx:id="removeGreaterButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="RemoveGreater" />
+                        <Button fx:id="updateButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Update" />
                     </children>
                     <VBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets />
                     </VBox.margin>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
                 </FlowPane>
             </children>
         </VBox>

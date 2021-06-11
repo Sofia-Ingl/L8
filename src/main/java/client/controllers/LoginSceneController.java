@@ -1,8 +1,10 @@
 package client.controllers;
 
 import client.Client;
+import client.FXApp;
 import client.util.AlertManager;
 import javafx.animation.RotateTransition;
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -12,6 +14,7 @@ import javafx.util.Duration;
 public class LoginSceneController {
 
     private Client client;
+    private FXApp app;
 
     @FXML
     private ImageView image;
@@ -30,10 +33,11 @@ public class LoginSceneController {
     @FXML
     private Label connectionLabel;
 
+
     @FXML
     private void signInButtonOnAction() {
         if (client.processAuthorization(usernameField.getText(), passwordField.getText(), registerCheckBox.isSelected())) {
-            AlertManager.message("Успех!", "Успех", Alert.AlertType.INFORMATION);
+            app.setMainScene();
         } else if (!client.isConnected()) {
             connectionLabel.textProperty().setValue("Disconnected...");
             connectionLabel.setTextFill(Color.rgb(30, 15, 220));
@@ -54,5 +58,9 @@ public class LoginSceneController {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public void setApp(FXApp fxApp) {
+        this.app = fxApp;
     }
 }
