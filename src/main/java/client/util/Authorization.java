@@ -68,7 +68,7 @@ public class Authorization {
         return login;
     }
 
-    private String getEncodedPassword(String password) {
+    public String getEncodedPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] bytes = md.digest(password.getBytes());

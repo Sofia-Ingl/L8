@@ -3,7 +3,6 @@ package client;
 import client.util.AlertManager;
 import client.util.Authorization;
 import client.util.Encryption;
-import client.util.Interaction;
 import javafx.scene.control.Alert;
 import shared.serializable.ClientRequest;
 import shared.serializable.ServerResponse;

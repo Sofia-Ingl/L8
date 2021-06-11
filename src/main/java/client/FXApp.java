@@ -37,9 +37,7 @@ public class FXApp extends Application {
         client = new Client(validatedHost, validatedPort);
         try {
             client.setConnectionWithServer();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException ignored) {}
     }
 
 
