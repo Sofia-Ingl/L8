@@ -19,12 +19,22 @@ public class ServerResponse implements Serializable {
         this.responseBody = responseToPrint;
     }
 
+    public ServerResponse(CommandExecutionCode code, String responseToPrint, LinkedHashSet<Movie> movieSet) {
+        this.code = code;
+        this.responseBody = responseToPrint;
+        this.movieSet = movieSet;
+    }
+
     public String getResponseToPrint() {
         return responseBody;
     }
 
     public CommandExecutionCode getCode() {
         return code;
+    }
+
+    public LinkedHashSet<Movie> getMovieSet() {
+        return movieSet;
     }
 
     @Override

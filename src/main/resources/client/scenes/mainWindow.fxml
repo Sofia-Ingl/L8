@@ -41,15 +41,15 @@
                                                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columns>
                                                 <TableColumn fx:id="idColumn" text="MovieId" />
-                                                <TableColumn fx:id="nameColumn" text="MovieName" />
-                                                <TableColumn fx:id="xColumn" text="XCoordinate" />
-                                                <TableColumn fx:id="yColumn" text="YCoordinate" />
-                                                <TableColumn fx:id="creationDateColumn" text="CreationDate" />
-                                                <TableColumn fx:id="oscarsColumn" text="Oscars" />
-                                                <TableColumn fx:id="gPalmsColumn" text="GoldenPalms" />
-                                                <TableColumn fx:id="taglineColumn" text="TagLine" />
+                                                <TableColumn fx:id="nameColumn" text="MovieName" prefWidth="120" />
+                                                <TableColumn fx:id="xColumn" text="XCoordinate" prefWidth="40"/>
+                                                <TableColumn fx:id="yColumn" text="YCoordinate" prefWidth="40" />
+                                                <TableColumn fx:id="creationDateColumn" text="CreationDate" prefWidth="120" />
+                                                <TableColumn fx:id="oscarsColumn" text="Oscars" prefWidth="40" />
+                                                <TableColumn fx:id="gPalmsColumn" text="GoldenPalms" prefWidth="40" />
+                                                <TableColumn fx:id="taglineColumn" text="TagLine" prefWidth="120"/>
                                                 <TableColumn fx:id="genreColumn" text="Genre" />
-                                                <TableColumn fx:id="scrNameColumn" text="Screenwriter" />
+                                                <TableColumn fx:id="scrNameColumn" text="Screenwriter" prefWidth="120" />
                                                 <TableColumn fx:id="scrHeightColumn" text="ScrHeight" />
                                                 <TableColumn fx:id="eyeColorColumn" text="ScrEyeColor" />
                                                 <TableColumn fx:id="nationalityColumn" text="ScrNationality" />

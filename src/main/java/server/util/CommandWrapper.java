@@ -21,6 +21,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class CommandWrapper {
 
+    private final CollectionStorage collectionStorage;
     private final HashMap<String, UserCommand> allCommandsAvailable = new HashMap<>();
     private final HashMap<String, InnerServerCommand> allInnerCommands = new HashMap<>();
     private final ArrayList<Command> lastSixCommands = new ArrayList<>();
@@ -29,6 +30,8 @@ public class CommandWrapper {
     private final ReentrantLock historyLock = new ReentrantLock();
 
     public CommandWrapper(CollectionStorage collectionStorage, DatabaseCollectionHandler databaseCollectionHandler, UserHandler userHandler, UserCommand[] listOfUserCommands, InnerServerCommand[] innerServerCommands) {
+
+        this.collectionStorage = collectionStorage;
 
         for (UserCommand userCommand : listOfUserCommands) {
             allCommandsAvailable.put(userCommand.getName(), userCommand);
@@ -71,7 +74,7 @@ public class CommandWrapper {
             code = CommandExecutionCode.EXIT;
         }
 
-        return new ServerResponse(code, commandResult.getSecond());
+        return new ServerResponse(code, commandResult.getSecond(), collectionStorage.getCollection());
     }
 
     public Pair<Boolean, String> executeCommand(String commandName, boolean isTechnical, String arg, Object obj, User user) {

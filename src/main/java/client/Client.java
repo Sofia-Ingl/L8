@@ -1,9 +1,9 @@
 package client;
 
 import client.util.AlertManager;
-import client.util.Authorization;
 import client.util.Encryption;
 import javafx.scene.control.Alert;
+import shared.data.Movie;
 import shared.serializable.ClientRequest;
 import shared.serializable.ServerResponse;
 import shared.serializable.User;
@@ -17,6 +17,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
+import java.util.LinkedHashSet;
 
 public class Client {
 
@@ -25,7 +26,6 @@ public class Client {
     private SocketChannel socketChannel;
     private Selector selector;
     private User user;
-    private boolean isConnected = false;
 
     public Client(String host, int port) {
         this.host = host;
@@ -37,7 +37,6 @@ public class Client {
         socketChannel = SocketChannel.open(socketAddress);
         socketChannel.configureBlocking(false);
         selector = Selector.open();
-        isConnected = true;
     }
 
     public boolean processAuthorization(String login, String pass, boolean isRegistration) {
@@ -49,22 +48,59 @@ public class Client {
             command = (isRegistration) ? "register" : "login";
             user = new User(login, Encryption.getEncodedPassword(pass));
             request = new ClientRequest(command, "", null, user);
-            socketChannel.register(selector, SelectionKey.OP_WRITE);
-            selector.select();
-            sendClientRequest(request);
-            selector.selectedKeys().clear();
-            socketChannel.register(selector, SelectionKey.OP_READ);
-            selector.select();
-            response = getResponse(getResponseBytes());
-            selector.selectedKeys().clear();
+            response = processRequest(request);
             if (response.getCode().equals(CommandExecutionCode.ERROR)) {
                 AlertManager.message("Error", response.getResponseToPrint(), Alert.AlertType.ERROR);
                 return false;
             }
             return true;
-        } catch (Exception ignored) {}
-
+        } catch (IOException e) {
+            try {
+                resetConnection();
+            } catch (IOException ignored) {
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return false;
+    }
+
+    public LinkedHashSet<Movie> processUserRequest(String command, String commandArg, Movie obj) {
+        ServerResponse response;
+        ClientRequest request = new ClientRequest(command, commandArg, obj, user);
+        try {
+            response = processRequest(request);
+            return response.getMovieSet();
+        } catch (IOException e) {
+            try {
+                resetConnection();
+            } catch (IOException ignored) {
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    private ServerResponse processRequest(ClientRequest request) throws IOException, ClassNotFoundException {
+        socketChannel.register(selector, SelectionKey.OP_WRITE);
+        selector.select();
+        sendClientRequest(request);
+        selector.selectedKeys().clear();
+        socketChannel.register(selector, SelectionKey.OP_READ);
+        selector.select();
+        ServerResponse response = getResponse(getResponseBytes());
+        selector.selectedKeys().clear();
+        return response;
+    }
+
+
+    public void resetConnection() throws IOException {
+
+        if (socketChannel != null) socketChannel.close();
+        if (socketChannel != null) selector.close();
+        setConnectionWithServer();
     }
 
     private void sendClientRequest(ClientRequest clientRequest) throws IOException {
@@ -82,7 +118,7 @@ public class Client {
         return (ServerResponse) Serialization.deserialize(bytes);
     }
 
-    public boolean isConnected() {
-        return isConnected;
+    public SocketChannel getSocketChannel() {
+        return socketChannel;
     }
 }

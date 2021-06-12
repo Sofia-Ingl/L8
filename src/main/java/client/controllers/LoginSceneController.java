@@ -11,6 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+import java.io.IOException;
+
 public class LoginSceneController {
 
     private Client client;
@@ -36,11 +38,20 @@ public class LoginSceneController {
 
     @FXML
     private void signInButtonOnAction() {
-        if (client.processAuthorization(usernameField.getText(), passwordField.getText(), registerCheckBox.isSelected())) {
-            app.setMainScene();
-        } else if (!client.isConnected()) {
+        if (client.getSocketChannel() == null || !client.getSocketChannel().isConnected()) {
             connectionLabel.textProperty().setValue("Disconnected...");
             connectionLabel.setTextFill(Color.rgb(30, 15, 220));
+            AlertManager.message("CONNECTION ERROR", "Connection failed, reconnection in process", Alert.AlertType.ERROR);
+            try {
+                Thread.sleep(500);
+                client.resetConnection();
+            } catch (IOException|InterruptedException e) {
+                AlertManager.message("CONNECTION ERROR", "Reconnection failed", Alert.AlertType.ERROR);
+                return;
+            }
+        }
+        if (client.processAuthorization(usernameField.getText(), passwordField.getText(), registerCheckBox.isSelected())) {
+            app.setMainScene();
         } else {
             connectionLabel.textProperty().setValue("Connected");
             connectionLabel.setTextFill(Color.BLACK);

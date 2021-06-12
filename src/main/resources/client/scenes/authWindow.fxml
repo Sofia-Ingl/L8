@@ -57,7 +57,7 @@
                     style="-fx-background-color: #ffbd75; -fx-border-color: #777571; -fx-border-width: 1;"
                     text="Sign in" GridPane.columnIndex="2" GridPane.columnSpan="2"
                     GridPane.halignment="RIGHT" GridPane.rowIndex="3"/>
-            <Label fx:id="connectionLabel" text="IsConnected..." GridPane.columnIndex="3" GridPane.halignment="RIGHT"
+            <Label fx:id="connectionLabel" GridPane.columnIndex="3" GridPane.halignment="RIGHT"
                    GridPane.rowIndex="4"/>
         </GridPane>
     </StackPane>
