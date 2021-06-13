@@ -35,7 +35,6 @@ public class LoginSceneController {
     @FXML
     private Label connectionLabel;
 
-
     @FXML
     private void signInButtonOnAction() {
         if (client.getSocketChannel() == null || !client.getSocketChannel().isConnected()) {

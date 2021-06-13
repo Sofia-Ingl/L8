@@ -1,7 +1,6 @@
 package client;
 
 import client.controllers.LoginSceneController;
-import client.controllers.MainSceneController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -48,19 +47,9 @@ public class FXApp extends Application {
 
         this.primaryStage = primaryStage;
         setStageStyle();
+        setAuthScene();
 
-        FXMLLoader loginWindowLoader = new FXMLLoader();
-        loginWindowLoader.setLocation(getClass().getResource("/client/scenes/authWindow.fxml"));
-        Parent loginWindowRootNode = loginWindowLoader.load();
-        Scene loginWindowScene = new Scene(loginWindowRootNode);
-        LoginSceneController loginWindowController = loginWindowLoader.getController();
-        loginWindowController.setClient(client);
-        loginWindowController.setApp(this);
-        loginWindowController.playAnimation();
 
-        primaryStage.setScene(loginWindowScene);
-        primaryStage.setResizable(false);
-        primaryStage.show();
     }
 
     private void setStageStyle() {
@@ -71,6 +60,28 @@ public class FXApp extends Application {
     }
 
 
+    public void setAuthScene() {
+        FXMLLoader loginWindowLoader = new FXMLLoader();
+        loginWindowLoader.setLocation(getClass().getResource("/client/scenes/authWindow.fxml"));
+        Parent loginWindowRootNode;
+        try {
+
+            loginWindowRootNode = loginWindowLoader.load();
+            Scene loginWindowScene = new Scene(loginWindowRootNode);
+            LoginSceneController loginWindowController = loginWindowLoader.getController();
+            loginWindowController.setClient(client);
+            loginWindowController.setApp(this);
+            loginWindowController.playAnimation();
+            primaryStage.setScene(loginWindowScene);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public void setMainScene() {
         FXMLLoader mainWindowLoader = new FXMLLoader();
         mainWindowLoader.setLocation(getClass().getResource("/client/scenes/MainWindow.fxml"));
@@ -78,7 +89,7 @@ public class FXApp extends Application {
         try {
             mainWindowRootNode = mainWindowLoader.load();
             Scene mainWindowScene = new Scene(mainWindowRootNode);
-            MainSceneController mainWindowController = mainWindowLoader.getController();
+            //MainSceneController mainWindowController = mainWindowLoader.getController();
             primaryStage.setScene(mainWindowScene);
             primaryStage.setResizable(true);
         } catch (IOException e) {

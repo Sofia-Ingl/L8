@@ -3,13 +3,19 @@ package client.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import shared.data.Color;
+import shared.data.Country;
+import shared.data.Movie;
+import shared.data.MovieGenre;
+
+import java.time.ZonedDateTime;
 
 public class MainSceneController {
 
     @FXML
     private GridPane topPanel;
     @FXML
-    private ComboBox languageChoiceBox;
+    private ComboBox<String> languageChoiceBox;
     @FXML
     private Button refreshButton;
     @FXML
@@ -17,39 +23,39 @@ public class MainSceneController {
     @FXML
     private Tab tableTab;
     @FXML
-    private TableView movieTable;
+    private TableView<Movie> movieTable;
     @FXML
     private Tab visualTab;
 
 
     @FXML
-    private TableColumn idColumn;
+    private TableColumn<Movie, Integer> idColumn;
     @FXML
-    private TableColumn nameColumn;
+    private TableColumn<Movie, String> nameColumn;
     @FXML
-    private TableColumn xColumn;
+    private TableColumn<Movie, Float> xColumn;
     @FXML
-    private TableColumn yColumn;
+    private TableColumn<Movie, Integer> yColumn;
     @FXML
-    private TableColumn creationDateColumn;
+    private TableColumn<Movie, ZonedDateTime> creationDateColumn;
     @FXML
-    private TableColumn oscarsColumn;
+    private TableColumn<Movie, Integer> oscarsColumn;
     @FXML
-    private TableColumn gPalmsColumn;
+    private TableColumn<Movie, Long> gPalmsColumn;
     @FXML
-    private TableColumn taglineColumn;
+    private TableColumn<Movie, String> taglineColumn;
     @FXML
-    private TableColumn genreColumn;
+    private TableColumn<Movie, MovieGenre> genreColumn;
     @FXML
-    private TableColumn scrNameColumn;
+    private TableColumn<Movie, String> scrNameColumn;
     @FXML
-    private TableColumn scrHeightColumn;
+    private TableColumn<Movie, Integer> scrHeightColumn;
     @FXML
-    private TableColumn eyeColorColumn;
+    private TableColumn<Movie, Color> eyeColorColumn;
     @FXML
-    private TableColumn nationalityColumn;
+    private TableColumn<Movie, Country> nationalityColumn;
     @FXML
-    private TableColumn ownerColumn;
+    private TableColumn<Movie, String> ownerColumn;
 
 
     @FXML
@@ -76,4 +82,6 @@ public class MainSceneController {
     private Button removeGreaterButton;
     @FXML
     private Button updateButton;
+
+
 }
