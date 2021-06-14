@@ -26,7 +26,6 @@ public class ClientConnection implements Runnable {
         ServerResponse serverResponse;
 
         boolean technicalInteraction = true;
-        boolean listOfCommandsToSend = false;
 
         try {
 
@@ -39,17 +38,11 @@ public class ClientConnection implements Runnable {
 
                     serverResponse = processRequestInNewThread(clientRequest, true);
 
-                    if (!listOfCommandsToSend) {
-                        if (serverResponse.getCode().equals(CommandExecutionCode.SUCCESS)) {
-                            listOfCommandsToSend = true;
-                            Server.logger.info("Аутентификация пользователя прошла успешно");
-                        } else {
-                            Server.logger.info("Аутентификация не пройдена");
-                        }
-                    } else {
-                        sendObjectInNewThread(server.getCommandWrapper().mapOfCommandsToSend());
-                        Server.logger.info("Список доступных команд отправлен клиенту");
+                    if (serverResponse.getCode().equals(CommandExecutionCode.SUCCESS)) {
                         technicalInteraction = false;
+                        Server.logger.info("Аутентификация пользователя прошла успешно");
+                    } else {
+                        Server.logger.info("Аутентификация не пройдена");
                     }
 
                 } else {

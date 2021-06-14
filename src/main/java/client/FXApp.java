@@ -1,11 +1,14 @@
 package client;
 
+import client.controllers.AskSceneController;
 import client.controllers.LoginSceneController;
+import client.controllers.MainSceneController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -43,20 +46,20 @@ public class FXApp extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
 
         this.primaryStage = primaryStage;
-        setStageStyle();
+        setStageStyle(primaryStage);
         setAuthScene();
 
 
     }
 
-    private void setStageStyle() {
-        primaryStage.setTitle("Movie Application");
+    private void setStageStyle(Stage stage) {
+        stage.setTitle("Movie Application");
         InputStream iconStream = getClass().getResourceAsStream("/client/images/34.png");
         Image image = new Image(iconStream);
-        primaryStage.getIcons().add(image);
+        stage.getIcons().add(image);
     }
 
 
@@ -83,15 +86,39 @@ public class FXApp extends Application {
 
 
     public void setMainScene() {
-        FXMLLoader mainWindowLoader = new FXMLLoader();
-        mainWindowLoader.setLocation(getClass().getResource("/client/scenes/MainWindow.fxml"));
-        Parent mainWindowRootNode;
+
         try {
-            mainWindowRootNode = mainWindowLoader.load();
+
+            FXMLLoader mainWindowLoader = new FXMLLoader();
+            mainWindowLoader.setLocation(getClass().getResource("/client/scenes/mainWindow.fxml"));
+            Parent mainWindowRootNode = mainWindowLoader.load();
             Scene mainWindowScene = new Scene(mainWindowRootNode);
-            //MainSceneController mainWindowController = mainWindowLoader.getController();
+            MainSceneController mainWindowController = mainWindowLoader.getController();
+
+            Stage askStage = new Stage();
+            setStageStyle(askStage);
+            FXMLLoader askSceneLoader = new FXMLLoader();
+            askSceneLoader.setLocation(getClass().getResource("/client/scenes/askWindow.fxml"));
+            Parent askWindowRoot = askSceneLoader.load();
+            AskSceneController askSceneController = askSceneLoader.getController();
+
+            askSceneController.setAskStage(askStage);
+
+            mainWindowController.setPrimaryStage(primaryStage);
+            mainWindowController.setAskStage(askStage);
+            mainWindowController.setAskSceneController(askSceneController);
+            mainWindowController.setClient(client);
+            mainWindowController.setUser(client.getUser());
+
+            Scene askScene = new Scene(askWindowRoot);
+            askStage.setScene(askScene);
+            askStage.setResizable(false);
+            askStage.initModality(Modality.WINDOW_MODAL);
+            askStage.initOwner(primaryStage);
+
             primaryStage.setScene(mainWindowScene);
             primaryStage.setResizable(true);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

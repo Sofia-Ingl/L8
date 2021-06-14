@@ -1,4 +1,139 @@
 package client.controllers;
 
+import client.util.AlertManager;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import shared.data.*;
+
 public class AskSceneController {
+
+    private Stage askStage;
+
+    @FXML
+    private TextField movieNameField;
+    @FXML
+    private TextField coordXField;
+    @FXML
+    private TextField coordYField;
+    @FXML
+    private TextField oscarsField;
+    @FXML
+    private TextField gPalmsField;
+    @FXML
+    private TextField taglineField;
+    @FXML
+    private ComboBox<MovieGenre> genreField;
+    @FXML
+    private TextField scrNameField;
+    @FXML
+    private TextField scrHeightField;
+    @FXML
+    private ComboBox<Color> eyeColorField;
+    @FXML
+    private ComboBox<Country> nationalityField;
+
+    Movie freshlyBakedMovie;
+
+    public void initialize() {
+        genreField.setItems(FXCollections.observableArrayList(MovieGenre.values()));
+        eyeColorField.setItems(FXCollections.observableArrayList(Color.values()));
+        nationalityField.setItems(FXCollections.observableArrayList(Country.values()));
+    }
+
+    public void enterButtonOnAction(ActionEvent actionEvent) {
+        try {
+            freshlyBakedMovie = new Movie(getMovieName(), getCoordinates(), getOscars(), getPalms(), getTagline(),
+                    genreField.getValue(), new Person(getScreenwriterName(), getHeight(), eyeColorField.getValue(),
+                    nationalityField.getValue()));
+            askStage.close();
+        } catch (IllegalArgumentException e) {
+            AlertManager.message("WRONG ARGUMENTS", "Check if every field is correct", Alert.AlertType.ERROR);
+        }
+    }
+
+    private String getMovieName() throws IllegalArgumentException {
+        if (movieNameField.getText().equals("")) throw new IllegalArgumentException();
+        return movieNameField.getText().trim();
+    }
+
+    private Coordinates getCoordinates() throws IllegalArgumentException {
+        try {
+            float X = Float.parseFloat(coordXField.getText().trim());
+            int Y = Integer.parseInt(coordYField.getText().trim());
+            if (X > 326 || Y > 281) throw new IllegalArgumentException();
+            return new Coordinates(X, Y);
+        } catch (NumberFormatException | NullPointerException e) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private int getOscars() throws IllegalArgumentException {
+        try {
+            int oscars = Integer.parseInt(oscarsField.getText().trim());
+            if (oscars < 1) throw new IllegalArgumentException();
+            return oscars;
+        } catch (NumberFormatException | NullPointerException e) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private long getPalms() throws IllegalArgumentException {
+        try {
+            long palms = Long.parseLong(gPalmsField.getText().trim());
+            if (palms < 1) throw new IllegalArgumentException();
+            return palms;
+        } catch (NumberFormatException | NullPointerException e) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private String getTagline() {
+        return taglineField.getText().trim();
+    }
+
+    private String getScreenwriterName() throws IllegalArgumentException {
+        if (scrNameField.getText().equals("")) throw new IllegalArgumentException();
+        return scrNameField.getText().trim();
+    }
+
+    private long getHeight() throws IllegalArgumentException {
+        try {
+            long height = Long.parseLong(scrHeightField.getText().trim());
+            if (height < 10 || height > 300) throw new IllegalArgumentException();
+            return height;
+        } catch (NumberFormatException | NullPointerException e) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public Movie getPreparedMovie() {
+        Movie movie = freshlyBakedMovie;
+        if (movie == null) throw new IllegalStateException();
+        freshlyBakedMovie = null;
+        return movie;
+    }
+
+    public void clearFields() {
+        movieNameField.clear();
+        coordXField.clear();
+        coordYField.clear();
+        oscarsField.clear();
+        gPalmsField.clear();
+        taglineField.clear();
+        scrNameField.clear();
+        scrHeightField.clear();
+
+        genreField.setValue(MovieGenre.TRAGEDY);
+        eyeColorField.setValue(Color.BLACK);
+        nationalityField.setValue(Country.RUSSIA);
+    }
+
+    public void setAskStage(Stage askStage) {
+        this.askStage = askStage;
+    }
 }

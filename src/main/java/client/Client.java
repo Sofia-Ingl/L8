@@ -121,4 +121,8 @@ public class Client {
     public SocketChannel getSocketChannel() {
         return socketChannel;
     }
+
+    public User getUser() {
+        return user;
+    }
 }

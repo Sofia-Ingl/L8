@@ -8,7 +8,7 @@
 <AnchorPane prefHeight="600.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.292"
             style="-fx-background-color: #ffd8ad;"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.AskSceneController">
-    <children>
+
         <GridPane layoutX="64.0" layoutY="36.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
@@ -32,7 +32,6 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <children>
 
                 <Label contentDisplay="CENTER" text="MOVIE INFO" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                     <font>
@@ -40,43 +39,43 @@
                     </font>
                 </Label>
 
-                <TextField prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
+                <TextField fx:id="movieNameField" prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
                            GridPane.rowIndex="1" style="-fx-border-width: 1; -fx-border-color: #777571;">
                     <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="15.0" top="5.0"/>
                     </GridPane.margin>
                 </TextField>
-                <TextField prefHeight="26.0" prefWidth="99.0" promptText="X" GridPane.columnIndex="1"
+                <TextField fx:id="coordXField" prefHeight="26.0" prefWidth="99.0" promptText="X" GridPane.columnIndex="1"
                            GridPane.rowIndex="2" style="-fx-border-width: 1; -fx-border-color: #777571;">
                     <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="20.0" top="5.0"/>
                     </GridPane.margin>
                 </TextField>
-                <TextField prefHeight="26.0" prefWidth="124.0" promptText="Y" GridPane.columnIndex="2"
+                <TextField fx:id="coordYField" prefHeight="26.0" prefWidth="124.0" promptText="Y" GridPane.columnIndex="2"
                            GridPane.rowIndex="2" style="-fx-border-width: 1; -fx-border-color: #777571;">
                     <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="15.0" top="5.0"/>
                     </GridPane.margin>
                 </TextField>
-                <TextField prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
+                <TextField fx:id="oscarsField" prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
                            GridPane.rowIndex="3" style="-fx-border-width: 1; -fx-border-color: #777571;">
                     <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="15.0" top="5.0"/>
                     </GridPane.margin>
                 </TextField>
-                <TextField prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
+                <TextField fx:id="gPalmsField" prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
                            GridPane.rowIndex="4" style="-fx-border-width: 1; -fx-border-color: #777571;">
                     <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="15.0" top="5.0"/>
                     </GridPane.margin>
                 </TextField>
-                <TextField prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
+                <TextField fx:id="taglineField" prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
                            GridPane.rowIndex="5" style="-fx-border-width: 1; -fx-border-color: #777571;">
                     <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="15.0" top="5.0"/>
                     </GridPane.margin>
                 </TextField>
-                <ComboBox prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
+                <ComboBox fx:id="genreField" prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
                           GridPane.rowIndex="6"
                           style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;">
                     <GridPane.margin>
@@ -147,26 +146,26 @@
                     </font>
                 </Label>
 
-                <TextField prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
+                <TextField fx:id="scrNameField" prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
                            GridPane.rowIndex="8" style="-fx-border-width: 1; -fx-border-color: #777571;">
                     <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="15.0" top="5.0"/>
                     </GridPane.margin>
                 </TextField>
-                <TextField prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
+                <TextField fx:id="scrHeightField" prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
                            GridPane.rowIndex="9" style="-fx-border-width: 1; -fx-border-color: #777571;">
                     <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="15.0" top="5.0"/>
                     </GridPane.margin>
                 </TextField>
-                <ComboBox prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
+                <ComboBox fx:id="eyeColorField" prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
                           style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;"
                           GridPane.rowIndex="10">
                     <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="15.0" top="5.0"/>
                     </GridPane.margin>
                 </ComboBox>
-                <ComboBox prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
+                <ComboBox fx:id="nationalityField" prefHeight="26.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
                           style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;"
                           GridPane.rowIndex="11">
                     <GridPane.margin>
@@ -213,15 +212,12 @@
 
                 <Button alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="ENTER"
                         GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="12"
-                        GridPane.rowSpan="2"
+                        GridPane.rowSpan="2" onAction="#enterButtonOnAction"
                         style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;"
                         GridPane.valignment="CENTER">
                     <font>
                         <Font name="Calibri Light" size="14.0"/>
                     </font>
                 </Button>
-
-            </children>
         </GridPane>
-    </children>
 </AnchorPane>
