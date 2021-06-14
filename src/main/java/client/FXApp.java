@@ -109,6 +109,7 @@ public class FXApp extends Application {
             mainWindowController.setAskSceneController(askSceneController);
             mainWindowController.setClient(client);
             mainWindowController.setUser(client.getUser());
+            mainWindowController.refreshButtonOnAction();
 
             Scene askScene = new Scene(askWindowRoot);
             askStage.setScene(askScene);
@@ -117,6 +118,8 @@ public class FXApp extends Application {
             askStage.initOwner(primaryStage);
 
             primaryStage.setScene(mainWindowScene);
+            primaryStage.setMinWidth(mainWindowScene.getWidth());
+            primaryStage.setMinHeight(mainWindowScene.getHeight());
             primaryStage.setResizable(true);
 
         } catch (IOException e) {

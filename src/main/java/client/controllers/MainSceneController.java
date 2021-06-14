@@ -2,6 +2,9 @@ package client.controllers;
 
 import client.Client;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -122,27 +125,39 @@ public class MainSceneController {
         try {
             Movie movie = askSceneController.getPreparedMovie();
             movie.setOwner(user);
-            LinkedHashSet<Movie> set = client.processUserRequest("add", "", movie);
+            processRequest("add", "", movie);
+
 //            for (Movie m:
 //                 set) {
 //                System.out.println(m);
 //            }
 
-        } catch (IllegalStateException ignored) {}
+        } catch (IllegalStateException ignored) {
+        }
     }
 
     public void updateButtonOnAction() {
-        askStage.showAndWait();
-        try {
-            Movie movie = askSceneController.getPreparedMovie();
-            movie.setOwner(user);
-            LinkedHashSet<Movie> set = client.processUserRequest("update", "", movie);
-        } catch (IllegalStateException ignored) {}
+//        askStage.showAndWait();
+//        try {
+//            Movie movie = askSceneController.getPreparedMovie();
+//            movie.setOwner(user);
+//            LinkedHashSet<Movie> set = client.processUserRequest("update", "", movie);
+//        } catch (IllegalStateException ignored) {}
 
     }
 
-    public void processRequest(String command, String stringArg, Serializable objArg) {
 
+    public void refreshButtonOnAction() {
+        processRequest("show");
+    }
+
+    public void processRequest(String command, String stringArg, Movie objArg) {
+        LinkedHashSet<Movie> set = client.processUserRequest(command, stringArg, objArg);
+        if (set != null) {
+            ObservableList<Movie> movieList = FXCollections.observableArrayList(set);
+            movieTable.setItems(movieList);
+            movieTable.getSelectionModel().clearSelection();
+        }
     }
 
     public void processRequest(String command) {
@@ -169,4 +184,5 @@ public class MainSceneController {
         this.user = user;
         usernameLabel.setText(user.getLogin());
     }
+
 }
