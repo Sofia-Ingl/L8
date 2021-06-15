@@ -2,11 +2,12 @@ package client.controllers;
 
 import client.util.AlertManager;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import shared.data.*;
 
@@ -45,11 +46,12 @@ public class AskSceneController {
         nationalityField.setItems(FXCollections.observableArrayList(Country.values()));
     }
 
-    public void enterButtonOnAction(ActionEvent actionEvent) {
+    public void enterButtonOnAction() {
         try {
             freshlyBakedMovie = new Movie(getMovieName(), getCoordinates(), getOscars(), getPalms(), getTagline(),
                     genreField.getValue(), new Person(getScreenwriterName(), getHeight(), eyeColorField.getValue(),
                     nationalityField.getValue()));
+            clearFields();
             askStage.close();
         } catch (IllegalArgumentException e) {
             AlertManager.message("WRONG ARGUMENTS", "Check if every field is correct", Alert.AlertType.ERROR);
@@ -128,12 +130,22 @@ public class AskSceneController {
         scrNameField.clear();
         scrHeightField.clear();
 
-        genreField.setValue(MovieGenre.TRAGEDY);
-        eyeColorField.setValue(Color.BLACK);
-        nationalityField.setValue(Country.RUSSIA);
+        genreField.setValue(null);
+        eyeColorField.setValue(null);
+        nationalityField.setValue(null);
     }
 
     public void setAskStage(Stage askStage) {
         this.askStage = askStage;
+    }
+
+    public void buttonHighlighted(MouseEvent mouseEvent) {
+        Button button = (Button) mouseEvent.getSource();
+        button.setStyle("-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #E1D1B9;");
+    }
+
+    public void buttonNormalized(MouseEvent mouseEvent) {
+        Button button = (Button) mouseEvent.getSource();
+        button.setStyle("-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;");
     }
 }

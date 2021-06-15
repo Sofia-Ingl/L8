@@ -1,13 +1,14 @@
 package client.controllers;
 
 import client.Client;
+import client.util.AlertManager;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import shared.data.Color;
@@ -16,7 +17,6 @@ import shared.data.Movie;
 import shared.data.MovieGenre;
 import shared.serializable.User;
 
-import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.LinkedHashSet;
 
@@ -127,23 +127,40 @@ public class MainSceneController {
             movie.setOwner(user);
             processRequest("add", "", movie);
 
-//            for (Movie m:
-//                 set) {
-//                System.out.println(m);
-//            }
+        } catch (IllegalStateException ignored) {
+        }
+    }
+
+
+    public void addIfMaxButtonOnAction() {
+        askStage.showAndWait();
+        try {
+            Movie movie = askSceneController.getPreparedMovie();
+            movie.setOwner(user);
+            processRequest("add_if_max", "", movie);
 
         } catch (IllegalStateException ignored) {
         }
     }
 
     public void updateButtonOnAction() {
-//        askStage.showAndWait();
-//        try {
-//            Movie movie = askSceneController.getPreparedMovie();
-//            movie.setOwner(user);
-//            LinkedHashSet<Movie> set = client.processUserRequest("update", "", movie);
-//        } catch (IllegalStateException ignored) {}
+        try {
+            if (!movieTable.getSelectionModel().isEmpty()) {
+                int id = movieTable.getSelectionModel().getSelectedItem().getId();
+                askStage.showAndWait();
+                Movie movie = askSceneController.getPreparedMovie();
+                movie.setOwner(user);
+                processRequest("update", String.valueOf(id), movie);
+            } else {
+                AlertManager.message("", "Object not chosen", Alert.AlertType.ERROR);
+            }
+        } catch (IllegalStateException ignored) {
+        }
 
+    }
+
+    public void clearButtonOnAction() {
+        processRequest("clear");
     }
 
 
@@ -185,4 +202,42 @@ public class MainSceneController {
         usernameLabel.setText(user.getLogin());
     }
 
+    public void removeByScreenwriterButtonOnAction() {
+        if (!movieTable.getSelectionModel().isEmpty()) {
+            String screenwriter = movieTable.getSelectionModel().getSelectedItem().getScreenwriter().getName();
+            processRequest("remove_by_screenwriter", screenwriter, null);
+        } else {
+            AlertManager.message("", "Object not chosen", Alert.AlertType.ERROR);
+        }
+    }
+
+    public void removeByIdButtonOnAction() {
+        if (!movieTable.getSelectionModel().isEmpty()) {
+            int id = movieTable.getSelectionModel().getSelectedItem().getId();
+            processRequest("remove_by_id", String.valueOf(id), null);
+        } else {
+            AlertManager.message("", "Object not chosen", Alert.AlertType.ERROR);
+        }
+    }
+
+    public void removeGreaterButtonOnAction() {
+        try {
+            askStage.showAndWait();
+            Movie movie = askSceneController.getPreparedMovie();
+            movie.setOwner(user);
+            processRequest("remove_greater", null, movie);
+        } catch (IllegalStateException ignored) {
+        }
+
+    }
+
+    public void buttonHighlighted(MouseEvent mouseEvent) {
+        Button button = (Button) mouseEvent.getSource();
+        button.setStyle("-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #E1D1B9;");
+    }
+
+    public void buttonNormalized(MouseEvent mouseEvent) {
+        Button button = (Button) mouseEvent.getSource();
+        button.setStyle("-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;");
+    }
 }

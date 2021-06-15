@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
@@ -72,5 +73,15 @@ public class LoginSceneController {
 
     public void setApp(FXApp fxApp) {
         this.app = fxApp;
+    }
+
+    public void buttonHighlighted(MouseEvent mouseEvent) {
+        Button button = (Button) mouseEvent.getSource();
+        button.setStyle("-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;");
+    }
+
+    public void buttonNormalized(MouseEvent mouseEvent) {
+        Button button = (Button) mouseEvent.getSource();
+        button.setStyle("-fx-background-color: #ffbd75; -fx-border-color: #777571; -fx-border-width: 1;");
     }
 }

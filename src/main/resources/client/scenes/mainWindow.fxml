@@ -22,7 +22,7 @@
                     </rowConstraints>
 
                         <ComboBox fx:id="languageChoiceBox" prefHeight="25.0" prefWidth="175.0" style="-fx-border-width: 1; -fx-border-color: #777571; -fx-background-color: #FCF8F2;" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
-                        <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#refreshButtonOnAction" prefHeight="26.0" prefWidth="92.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Refresh" GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
+                        <Button fx:id="refreshButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" onAction="#refreshButtonOnAction" prefHeight="26.0" prefWidth="92.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Refresh" GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
                         <Label fx:id="usernameLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="173.0" style="-fx-border-width: 2; -fx-border-color: #777571; -fx-background-color: #FCF8F2;" text="User" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                             <font>
                                 <Font name="Calibri Light" size="18.0" />
@@ -36,19 +36,19 @@
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="1400.0">
                                         <TableView fx:id="movieTable" prefHeight="516.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columns>
-                                                <TableColumn fx:id="idColumn" maxWidth="80" text="MovieId" />
-                                                <TableColumn fx:id="nameColumn" maxWidth="180" text="MovieName" />
-                                                <TableColumn maxWidth="80" text="XCoordinate" fx:id="xColumn" />
-                                                <TableColumn fx:id="yColumn" maxWidth="80" text="YCoordinate" />
-                                                <TableColumn fx:id="creationDateColumn" maxWidth="280" text="CreationDate" />
-                                                <TableColumn fx:id="oscarsColumn" maxWidth="80" text="Oscars" />
-                                                <TableColumn fx:id="gPalmsColumn" maxWidth="80" text="GoldenPalms" />
-                                                <TableColumn fx:id="taglineColumn" maxWidth="80" text="TagLine" />
-                                                <TableColumn fx:id="genreColumn" maxWidth="80" text="Genre" />
-                                                <TableColumn fx:id="scrNameColumn" maxWidth="180" text="Screenwriter" />
-                                                <TableColumn fx:id="scrHeightColumn" maxWidth="80" text="ScrHeight" />
-                                                <TableColumn fx:id="eyeColorColumn" maxWidth="80" text="ScrEyeColor" />
-                                                <TableColumn fx:id="nationalityColumn" maxWidth="80" text="ScrNationality" />
+                                                <TableColumn fx:id="idColumn" minWidth="80.0" maxWidth="80" text="MovieId" />
+                                                <TableColumn fx:id="nameColumn" minWidth="80.0" maxWidth="180" text="MovieName" />
+                                                <TableColumn fx:id="xColumn" minWidth="80.0" maxWidth="80" text="XCoordinate" />
+                                                <TableColumn fx:id="yColumn" minWidth="80.0" maxWidth="80" text="YCoordinate" />
+                                                <TableColumn fx:id="creationDateColumn" minWidth="80.0" maxWidth="280" text="CreationDate" />
+                                                <TableColumn fx:id="oscarsColumn" minWidth="80.0" maxWidth="80" text="Oscars" />
+                                                <TableColumn fx:id="gPalmsColumn" minWidth="80.0" maxWidth="80" text="GoldenPalms" />
+                                                <TableColumn fx:id="taglineColumn" minWidth="80.0" maxWidth="80" text="TagLine" />
+                                                <TableColumn fx:id="genreColumn" minWidth="80.0" maxWidth="80" text="Genre" />
+                                                <TableColumn fx:id="scrNameColumn" minWidth="80.0" maxWidth="180" text="Screenwriter" />
+                                                <TableColumn fx:id="scrHeightColumn" minWidth="80.0" maxWidth="80" text="ScrHeight" />
+                                                <TableColumn fx:id="eyeColorColumn" minWidth="80.0" maxWidth="80" text="ScrEyeColor" />
+                                                <TableColumn fx:id="nationalityColumn" minWidth="80.0" maxWidth="80" text="ScrNationality" />
                                                 <TableColumn fx:id="ownerColumn" maxWidth="120" minWidth="80.0" text="Owner" />
                                             </columns>
                                             <columnResizePolicy>
@@ -68,18 +68,18 @@
                 <Separator prefHeight="15.0" prefWidth="1120.0" style="-fx-background-color: #D9C196;" />
                 <FlowPane alignment="CENTER" hgap="10.0" prefHeight="75.0" prefWidth="1120.0" style="-fx-background-color: #ffd8ad;" vgap="10.0">
 
-                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Add" />
-                        <Button fx:id="addIfMaxButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="AddIfMax" />
-                        <Button fx:id="clearButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Clear" />
-                        <Button fx:id="executeScriptButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="ExecuteScript" />
-                        <Button fx:id="gPalmsFilterButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="GPalmsFilter" />
-                        <Button fx:id="helpButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Help" />
-                        <Button fx:id="historyButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="History" />
-                        <Button fx:id="infoButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Info" />
-                        <Button fx:id="removeByScreenwriterButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="RemoveByScreenwriter" />
-                        <Button fx:id="removeByIdButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Remove" />
-                        <Button fx:id="removeGreaterButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="RemoveGreater" />
-                        <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateButtonOnAction" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Update" />
+                        <Button fx:id="addButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Add" />
+                        <Button fx:id="addIfMaxButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" onAction="#addIfMaxButtonOnAction" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="AddIfMax" />
+                        <Button fx:id="clearButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" onAction="#clearButtonOnAction" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Clear" />
+                        <Button fx:id="executeScriptButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="ExecuteScript" />
+                        <Button fx:id="gPalmsFilterButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="GPalmsFilter" />
+                        <Button fx:id="helpButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Help" />
+                        <Button fx:id="historyButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="History" />
+                        <Button fx:id="infoButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Info" />
+                        <Button fx:id="removeByScreenwriterButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" onAction="#removeByScreenwriterButtonOnAction" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="RemoveByScreenwriter" />
+                        <Button fx:id="removeByIdButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" onAction="#removeByIdButtonOnAction" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Remove" />
+                        <Button fx:id="removeGreaterButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" onAction="#removeGreaterButtonOnAction" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="RemoveGreater" />
+                        <Button fx:id="updateButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" onAction="#updateButtonOnAction" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Update" />
 
                     <VBox.margin>
                         <Insets />
