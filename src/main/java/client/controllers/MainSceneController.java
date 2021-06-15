@@ -205,7 +205,7 @@ public class MainSceneController {
     public void removeByScreenwriterButtonOnAction() {
         if (!movieTable.getSelectionModel().isEmpty()) {
             String screenwriter = movieTable.getSelectionModel().getSelectedItem().getScreenwriter().getName();
-            processRequest("remove_by_screenwriter", screenwriter, null);
+            processRequest("remove_all_by_screenwriter", screenwriter, null);
         } else {
             AlertManager.message("", "Object not chosen", Alert.AlertType.ERROR);
         }

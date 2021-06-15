@@ -3,6 +3,8 @@ package client;
 import client.controllers.AskSceneController;
 import client.controllers.LoginSceneController;
 import client.controllers.MainSceneController;
+import client.util.AlertManager;
+import client.util.Localization;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +18,7 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class FXApp extends Application {
@@ -27,9 +30,13 @@ public class FXApp extends Application {
 
     private Client client;
     private Stage primaryStage;
+    private static Localization localization;
 
     public static void main(String[] args) {
 
+        localization = new Localization();
+        localization.setResourceBundle(ResourceBundle.getBundle("client.bundles.gui"));
+        AlertManager.setLocalization(localization);
         loadConfigs();
         if (validateAndSetHostAndPort(args)) launch(args);
         else System.exit(0);
@@ -74,6 +81,7 @@ public class FXApp extends Application {
             LoginSceneController loginWindowController = loginWindowLoader.getController();
             loginWindowController.setClient(client);
             loginWindowController.setApp(this);
+            loginWindowController.setLocalization(localization);
             loginWindowController.playAnimation();
             primaryStage.setScene(loginWindowScene);
             primaryStage.setResizable(false);
