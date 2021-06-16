@@ -117,6 +117,7 @@ public class FXApp extends Application {
             mainWindowController.setAskSceneController(askSceneController);
             mainWindowController.setClient(client);
             mainWindowController.setUser(client.getUser());
+            mainWindowController.setLocalization(localization);
             mainWindowController.refreshButtonOnAction();
 
             Scene askScene = new Scene(askWindowRoot);

@@ -13,4 +13,8 @@ public class Localization {
     public String getStringBinding(String keyValue) {
         return resourceBundle.getString(keyValue);
     }
+
+    public ResourceBundle getResourceBundle() {
+        return resourceBundle;
+    }
 }

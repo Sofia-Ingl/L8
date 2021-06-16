@@ -19,7 +19,7 @@ public class gui_ru_RU extends ListResourceBundle {
             //{"AddIfMaxNotSuccess", "Элемент не был максимальным, в коллекцию не добавлен"},
             {"ScriptError", "Во время выполнения скрипта произошла ошибка"},
             {"RegisterError", "Ошибка при регистрации"},
-            {"RegisterError", "Ошибка при входе в учетную запись"},
+            {"LoginError", "Ошибка при входе в учетную запись"},
             {"RemoveError", "Ошибка при удалении элемента"},
             {"RemoveGreaterError", "Ошибка при удалении больших элементов"},
             {"RemoveByScreenwriterError", "Ошибка при удалении элемента по сценаристу"},
@@ -29,12 +29,11 @@ public class gui_ru_RU extends ListResourceBundle {
                     "Внизу окна расположены кнопки взаимодействия с базой. " +
                     "Для выполнения действий по удалению или обновлению необходимо выбрать строку таблицы. " +
                     "Команда \"Очистить\" удаляет из БД лишь те объекты, что принадлежат вам.\n" +
-                    "В разделе \"Визуализация\" вы найдете визуальное представление объектов БД. " +
-                    "Двойной клик по объекту даст возможность его отредактировать."},
+                    "В разделе \"Визуализация\" вы найдете визуальное представление объектов БД."},
             //{"InfoMessage", "Информация о коллекции: \n Дата доступа: {0} \n Тип: {1} \n Размер: {2}"},
 
             {"idColumn", "Идентификатор"},
-            {"nameColumn", "Имя"},
+            {"nameColumn", "Название"},
             {"xColumn", "X"},
             {"yColumn", "Y"},
             {"creationDateColumn", "Дата создания"},
@@ -60,6 +59,7 @@ public class gui_ru_RU extends ListResourceBundle {
             {"removeByIdButton", "Удалить по id"},
             {"removeGreaterButton", "Удалить большие"},
             {"updateButton", "Обновить элемент"},
+            {"refreshButton", "Обновить"},
 
             {"ConnectionError", "Ошибка соединения"},
             {"Disconnected", "Соединение не установлено..."},
@@ -72,20 +72,6 @@ public class gui_ru_RU extends ListResourceBundle {
 
     };
 
-/*
-<Button fx:id="addButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Add" />
-                        <Button fx:id="addIfMaxButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" onAction="#addIfMaxButtonOnAction" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="AddIfMax" />
-                        <Button fx:id="clearButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" onAction="#clearButtonOnAction" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Clear" />
-                        <Button fx:id="executeScriptButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="ExecuteScript" />
-                        <Button fx:id="gPalmsFilterButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="GPalmsFilter" />
-                        <Button fx:id="helpButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Help" />
-                        <Button fx:id="historyButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="History" />
-                        <Button fx:id="infoButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Info" />
-                        <Button fx:id="removeByScreenwriterButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" onAction="#removeByScreenwriterButtonOnAction" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="RemoveByScreenwriter" />
-                        <Button fx:id="removeByIdButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" onAction="#removeByIdButtonOnAction" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Remove" />
-                        <Button fx:id="removeGreaterButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" onAction="#removeGreaterButtonOnAction" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="RemoveGreater" />
-                        <Button fx:id="updateButton"
- */
 
     @Override
     public Object[][] getContents() {

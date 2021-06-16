@@ -21,7 +21,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
 
-                        <ComboBox fx:id="languageChoiceBox" prefHeight="25.0" prefWidth="175.0" style="-fx-border-width: 1; -fx-border-color: #777571; -fx-background-color: #FCF8F2;" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
+                        <ComboBox fx:id="languageChoiceBox" onAction="#languageChoiceBoxOnAction" prefHeight="25.0" prefWidth="175.0" style="-fx-border-width: 1; -fx-border-color: #777571; -fx-background-color: #FCF8F2;" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
                         <Button fx:id="refreshButton" onMouseEntered="#buttonHighlighted" onMouseExited="#buttonNormalized" mnemonicParsing="false" onAction="#refreshButtonOnAction" prefHeight="26.0" prefWidth="92.0" style="-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;" text="Refresh" GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
                         <Label fx:id="usernameLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="173.0" style="-fx-border-width: 2; -fx-border-color: #777571; -fx-background-color: #FCF8F2;" text="User" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                             <font>

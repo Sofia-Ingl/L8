@@ -2,9 +2,13 @@ package client.controllers;
 
 import client.Client;
 import client.util.AlertManager;
+import client.util.Localization;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
@@ -18,7 +22,10 @@ import shared.data.MovieGenre;
 import shared.serializable.User;
 
 import java.time.ZonedDateTime;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class MainSceneController {
 
@@ -27,6 +34,8 @@ public class MainSceneController {
     private AskSceneController askSceneController;
     private Client client;
     private User user;
+    private Localization localization;
+    private HashMap<String, Locale> sysLocales;
 
     @FXML
     private GridPane topPanel;
@@ -101,6 +110,10 @@ public class MainSceneController {
 
     public void initialize() {
         initTable();
+        sysLocales = new HashMap<>();
+        sysLocales.put("Русский", new Locale("ru", "RU"));
+        sysLocales.put("English (Canada)", new Locale("en", "CA"));
+        languageChoiceBox.setItems(FXCollections.observableArrayList(sysLocales.keySet()));
     }
 
     private void initTable() {
@@ -239,5 +252,57 @@ public class MainSceneController {
     public void buttonNormalized(MouseEvent mouseEvent) {
         Button button = (Button) mouseEvent.getSource();
         button.setStyle("-fx-border-width: 1; -fx-border-color: #777571;-fx-background-color: #FCF8F2;");
+    }
+
+    public void languageChoiceBoxOnAction() {
+
+        localization.setResourceBundle(ResourceBundle.getBundle("client.bundles.gui", sysLocales.get(languageChoiceBox.getValue())));
+        setLanguage();
+    }
+
+    public void setLocalization(Localization localization) {
+        this.localization = localization;
+        for (String localeName : sysLocales.keySet()) {
+            if (sysLocales.get(localeName).equals(localization.getResourceBundle().getLocale()))
+                languageChoiceBox.getSelectionModel().select(localeName);
+        }
+        if (languageChoiceBox.getSelectionModel().getSelectedItem().isEmpty())
+            languageChoiceBox.getSelectionModel().selectFirst();
+
+
+        setLanguage();
+
+    }
+
+    private void setLanguage() {
+        idColumn.setText(localization.getStringBinding("idColumn"));
+        nameColumn.setText(localization.getStringBinding("nameColumn"));
+        xColumn.setText(localization.getStringBinding("xColumn"));
+        yColumn.setText(localization.getStringBinding("yColumn"));
+        creationDateColumn.setText(localization.getStringBinding("creationDateColumn"));
+        oscarsColumn.setText(localization.getStringBinding("oscarsColumn"));
+        gPalmsColumn.setText(localization.getStringBinding("gPalmsColumn"));
+        taglineColumn.setText(localization.getStringBinding("taglineColumn"));
+        genreColumn.setText(localization.getStringBinding("genreColumn"));
+        scrNameColumn.setText(localization.getStringBinding("scrNameColumn"));
+        scrHeightColumn.setText(localization.getStringBinding("scrHeightColumn"));
+        eyeColorColumn.setText(localization.getStringBinding("eyeColorColumn"));
+        nationalityColumn.setText(localization.getStringBinding("nationalityColumn"));
+        ownerColumn.setText(localization.getStringBinding("ownerColumn"));
+
+
+        addButton.setText(localization.getStringBinding("addButton"));
+        addIfMaxButton.setText(localization.getStringBinding("addIfMaxButton"));
+        clearButton.setText(localization.getStringBinding("clearButton"));
+        executeScriptButton.setText(localization.getStringBinding("executeScriptButton"));
+        gPalmsFilterButton.setText(localization.getStringBinding("gPalmsFilterButton"));
+        helpButton.setText(localization.getStringBinding("helpButton"));
+        historyButton.setText(localization.getStringBinding("historyButton"));
+        infoButton.setText(localization.getStringBinding("infoButton"));
+        removeByScreenwriterButton.setText(localization.getStringBinding("removeByScreenwriterButton"));
+        removeByIdButton.setText(localization.getStringBinding("removeByIdButton"));
+        removeGreaterButton.setText(localization.getStringBinding("removeGreaterButton"));
+        updateButton.setText(localization.getStringBinding("updateButton"));
+        refreshButton.setText(localization.getStringBinding("refreshButton"));
     }
 }
