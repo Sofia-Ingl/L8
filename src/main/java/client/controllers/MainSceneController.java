@@ -8,6 +8,7 @@ import javafx.animation.TranslateTransition;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -26,8 +27,10 @@ import shared.data.Color;
 import shared.data.Country;
 import shared.data.Movie;
 import shared.data.MovieGenre;
+import shared.serializable.Pair;
 import shared.serializable.User;
 
+import java.io.File;
 import java.time.ZonedDateTime;
 import java.util.*;
 
@@ -133,8 +136,8 @@ public class MainSceneController {
         textMap = new HashMap<>();
         userColorMap = new HashMap<>();
         fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("."));
         random = new Random(17);
-
 
     }
 
@@ -432,5 +435,19 @@ public class MainSceneController {
 
     public void visualTabOnSelection() {
         refreshCanvas(true);
+    }
+
+    public void executeScriptButtonOnAction() {
+        File selectedFile = fileChooser.showOpenDialog(primaryStage);
+        if (selectedFile == null) return;
+        Pair<Boolean, HashSet<Movie>> result = client.processScript(selectedFile.getPath());
+        if (result.getFirst()) {
+
+            ObservableList<Movie> movieList = FXCollections.observableArrayList(result.getSecond());
+            movieTable.setItems(movieList);
+            movieTable.getSelectionModel().clearSelection();
+            refreshCanvas(false);
+
+        }
     }
 }

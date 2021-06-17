@@ -2,9 +2,12 @@ package client;
 
 import client.util.AlertManager;
 import client.util.Encryption;
+import client.util.ScriptProcessor;
 import javafx.scene.control.Alert;
 import shared.data.Movie;
+import shared.exceptions.ScriptException;
 import shared.serializable.ClientRequest;
+import shared.serializable.Pair;
 import shared.serializable.ServerResponse;
 import shared.serializable.User;
 import shared.util.CommandExecutionCode;
@@ -17,6 +20,8 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 
 public class Client {
@@ -26,6 +31,7 @@ public class Client {
     private SocketChannel socketChannel;
     private Selector selector;
     private User user;
+    private ScriptProcessor scriptProcessor;
 
     public Client(String host, int port) {
         this.host = host;
@@ -82,6 +88,31 @@ public class Client {
         return null;
     }
 
+    public Pair<Boolean, HashSet<Movie>> processScript(String path) {
+        ServerResponse response;
+        ClientRequest request;
+        HashSet<Movie> movies = null;
+        scriptProcessor.setFirstScript(path);
+        try {
+            while (true) {
+                request = scriptProcessor.generateRequest();
+                if (request == null) {
+                    if (scriptProcessor.isDone()) {
+                        break;
+                    }
+                } else {
+                    response = processRequest(request);
+                    movies = response.getMovieSet();
+                    if (response.getCode().equals(CommandExecutionCode.ERROR)) throw new ScriptException();
+                }
+            }
+            return new Pair<>(Boolean.TRUE, movies);
+        } catch (ScriptException | IOException | ClassNotFoundException e) {
+            AlertManager.message("", "ScriptException occurred", Alert.AlertType.ERROR);
+        }
+        return new Pair<>(Boolean.FALSE, movies);
+    }
+
 
     private ServerResponse processRequest(ClientRequest request) throws IOException, ClassNotFoundException {
         socketChannel.register(selector, SelectionKey.OP_WRITE);
@@ -124,5 +155,10 @@ public class Client {
 
     public User getUser() {
         return user;
+    }
+
+    public void setScriptProcessor(ScriptProcessor scriptProcessor) {
+        this.scriptProcessor = scriptProcessor;
+        scriptProcessor.setClient(this);
     }
 }

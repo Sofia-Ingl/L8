@@ -39,7 +39,8 @@ public class ClientRequest implements Serializable {
         return "ClientRequest{" +
                 "command='" + command + '\'' +
                 ", commandArgument='" + commandArgument + '\'' +
-                ", createdObject=" + objectArg.toString() +
+                ", objectArg=" + objectArg +
+                ", user=" + user +
                 '}';
     }
 }

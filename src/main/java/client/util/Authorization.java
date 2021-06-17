@@ -1,4 +1,4 @@
-package client.util;
+/*package client.util;
 
 
 import shared.serializable.ClientRequest;
@@ -115,3 +115,5 @@ public class Authorization {
         System.exit(1);
     }
 }
+
+ */

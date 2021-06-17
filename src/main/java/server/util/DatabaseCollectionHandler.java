@@ -136,6 +136,7 @@ public class DatabaseCollectionHandler {
 
             movie.setCreationDate(creationDate);
             movie.setId(movieId);
+            movie.setOwner(owner);
 
             databaseManager.commit();
             return movie;

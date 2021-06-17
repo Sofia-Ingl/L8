@@ -5,6 +5,8 @@ import client.controllers.LoginSceneController;
 import client.controllers.MainSceneController;
 import client.util.AlertManager;
 import client.util.Localization;
+import client.util.ScriptProcessor;
+import client.util.UserElementGetter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -45,6 +47,7 @@ public class FXApp extends Application {
     @Override
     public void init() {
         client = new Client(validatedHost, validatedPort);
+        client.setScriptProcessor(new ScriptProcessor(new UserElementGetter()));
         try {
             client.setConnectionWithServer();
         } catch (IOException ignored) {
