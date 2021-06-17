@@ -47,6 +47,9 @@ public class gui_ru_RU extends ListResourceBundle {
             {"nationalityColumn", "Национальность"},
             {"ownerColumn", "Владелец"},
 
+            {"visualTab", "Визуализация"},
+            {"tableTab","Таблица"},
+
             {"addButton", "Добавить элемент"},
             {"addIfMaxButton", "Добавить макс. элемент"},
             {"clearButton", "Очистить"},

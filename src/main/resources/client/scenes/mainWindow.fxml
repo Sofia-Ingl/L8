@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8.0.292" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.MainSceneController">
 
-        <VBox prefHeight="700.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox fx:id="vBox" prefHeight="700.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
                 <GridPane fx:id="topPanel" prefHeight="50.0" prefWidth="1120.0" style="-fx-background-color: #ffd8ad;">
                     <columnConstraints>
@@ -29,7 +29,7 @@
                             </font>
                         </Label>
                 </GridPane>
-                <TabPane prefHeight="550.0" prefWidth="1400.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" VBox.vgrow="ALWAYS">
+                <TabPane fx:id="tabPane" prefHeight="550.0" prefWidth="1400.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" VBox.vgrow="ALWAYS">
 
                         <Tab fx:id="tableTab" text="Movie Table">
 
@@ -59,9 +59,9 @@
                                 </AnchorPane>
 
                         </Tab>
-                        <Tab fx:id="visualTab" text="Visualization">
+                        <Tab fx:id="visualTab" onSelectionChanged="#visualTabOnSelection" text="Visualization">
 
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #FFF4E3, linear-gradient(from 0.5px 0.0px to 10.5px  0.0px, repeat, grey 5%, transparent 5%),linear-gradient(from 0.0px 0.5px to  0.0px 10.5px, repeat, grey 5%, transparent 5%);">
+                                <AnchorPane fx:id="visualPane" style="-fx-background-color: #FFF4E3, linear-gradient(from 0.5px 0.0px to 10.5px  0.0px, repeat, grey 5%, transparent 5%),linear-gradient(from 0.0px 0.5px to  0.0px 10.5px, repeat, grey 5%, transparent 5%);">
                                 </AnchorPane>
                         </Tab>
                 </TabPane>

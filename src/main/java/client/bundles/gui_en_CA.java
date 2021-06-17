@@ -41,6 +41,9 @@ public class gui_en_CA extends ListResourceBundle {
             {"nationalityColumn", "Nationality"},
             {"ownerColumn", "Owner"},
 
+            {"visualTab", "Visualization"},
+            {"tableTab","Table"},
+
             {"addButton", "Add"},
             {"addIfMaxButton", "Add if max"},
             {"clearButton", "Clear"},

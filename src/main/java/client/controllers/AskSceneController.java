@@ -77,7 +77,7 @@ public class AskSceneController {
     private int getOscars() throws IllegalArgumentException {
         try {
             int oscars = Integer.parseInt(oscarsField.getText().trim());
-            if (oscars < 1) throw new IllegalArgumentException();
+            if (oscars < 1 || oscars > 20) throw new IllegalArgumentException();
             return oscars;
         } catch (NumberFormatException | NullPointerException e) {
             throw new IllegalArgumentException();
@@ -118,6 +118,20 @@ public class AskSceneController {
         if (movie == null) throw new IllegalStateException();
         freshlyBakedMovie = null;
         return movie;
+    }
+
+    public void prepareFieldsForUpdate(Movie m) {
+        movieNameField.setText(m.getName());
+        coordXField.setText(String.valueOf(m.getCoordinates().getX()));
+        coordYField.setText(String.valueOf(m.getCoordinates().getY()));
+        oscarsField.setText(String.valueOf(m.getOscarsCount()));
+        gPalmsField.setText(String.valueOf(m.getGoldenPalmCount()));
+        taglineField.setText(m.getTagline());
+        genreField.setValue(m.getGenre());
+        scrNameField.setText(m.getScreenwriter().getName());
+        scrHeightField.setText(String.valueOf(m.getScreenwriter().getHeight()));
+        eyeColorField.setValue(m.getScreenwriter().getEyeColor());
+        nationalityField.setValue(m.getScreenwriter().getNationality());
     }
 
     public void clearFields() {
