@@ -56,7 +56,7 @@ public class Client {
             request = new ClientRequest(command, "", null, user);
             response = processRequest(request);
             if (response.getCode().equals(CommandExecutionCode.ERROR)) {
-                AlertManager.message("Error", response.getResponseToPrint(), Alert.AlertType.ERROR);
+                AlertManager.displayError(response.getResponseToPrint());
                 return false;
             }
             return true;
@@ -76,6 +76,9 @@ public class Client {
         ClientRequest request = new ClientRequest(command, commandArg, obj, user);
         try {
             response = processRequest(request);
+            if (response.getCode().equals(CommandExecutionCode.ERROR)) {
+                AlertManager.displayError(response.getResponseToPrint());
+            }
             return response.getMovieSet();
         } catch (IOException e) {
             try {
@@ -108,7 +111,7 @@ public class Client {
             }
             return new Pair<>(Boolean.TRUE, movies);
         } catch (ScriptException | IOException | ClassNotFoundException e) {
-            AlertManager.message("", "ScriptException occurred", Alert.AlertType.ERROR);
+            AlertManager.displayError("ScriptError");
         }
         return new Pair<>(Boolean.FALSE, movies);
     }

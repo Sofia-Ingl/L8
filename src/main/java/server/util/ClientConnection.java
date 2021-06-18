@@ -50,7 +50,7 @@ public class ClientConnection implements Runnable {
                 }
 
                 if (clientRequest.getCommand().equals("exit")) {
-                    Server.logger.info(serverResponse.getResponseToPrint());
+                    Server.logger.info("Пользователь завершил сеанс с помощью команды exit");
                 } else {
                     if (!clientRequest.getCommand().equals("send_available_commands")) {
                         sendObjectInNewThread(serverResponse);

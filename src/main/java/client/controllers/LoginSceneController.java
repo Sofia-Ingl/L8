@@ -64,12 +64,11 @@ public class LoginSceneController extends Controller {
         if (client.getSocketChannel() == null || !client.getSocketChannel().isConnected()) {
             connectionLabel.textProperty().setValue(localization.getStringBinding("Disconnected"));
             connectionLabel.setTextFill(Color.rgb(30, 15, 220));
-            AlertManager.message("CONNECTION ERROR", "Connection failed, reconnection in process", Alert.AlertType.ERROR);
             try {
                 Thread.sleep(500);
                 client.resetConnection();
             } catch (IOException | InterruptedException e) {
-                AlertManager.message("CONNECTION ERROR", "Reconnection failed", Alert.AlertType.ERROR);
+                AlertManager.displayError("ConnectionError");
                 return;
             }
         }

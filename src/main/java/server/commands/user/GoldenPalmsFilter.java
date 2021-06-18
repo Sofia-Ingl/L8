@@ -1,6 +1,7 @@
 package server.commands.user;
 
 import server.commands.abstracts.UserCommand;
+import server.commands.util.CommandResultContainer;
 import shared.serializable.Pair;
 import shared.serializable.User;
 
@@ -11,31 +12,28 @@ public class GoldenPalmsFilter extends UserCommand {
     }
 
     @Override
-    public Pair<Boolean, String> execute(String arg, Object obj, User user) {
+    public Pair<Boolean, CommandResultContainer> execute(String arg, Object obj, User user) {
 
-        String errorString;
-
+        CommandResultContainer container = new CommandResultContainer();
         try {
             if (arg.isEmpty()) {
-                throw new IllegalArgumentException("Неверное число аргументов при использовании команды " + this.getName());
+                throw new IllegalArgumentException();
             }
             if (!arg.trim().matches("\\d+")) {
-                throw new IllegalArgumentException("Неправильный тип аргумента к команде!");
+                throw new IllegalArgumentException();
             } else {
                 long goldenPalms = Long.parseLong(arg.trim());
 
                 String result = getCollectionStorage().returnGreaterThanGoldenPalms(goldenPalms);
 
-                return new Pair<>(true, result);
+                return new Pair<>(true, container);
 
             }
 
-        } catch (NumberFormatException e) {
-            errorString = "Неправильно введен аргумент!";
         } catch (IllegalArgumentException e) {
-            errorString = e.getMessage();
+            container.setResult("ScriptError");
         }
-        return new Pair<>(false, errorString);
+        return new Pair<>(false, container);
     }
 }
 

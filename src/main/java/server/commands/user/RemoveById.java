@@ -1,6 +1,7 @@
 package server.commands.user;
 
 import server.commands.abstracts.UserCommand;
+import server.commands.util.CommandResultContainer;
 import shared.serializable.Pair;
 import shared.serializable.User;
 
@@ -16,33 +17,23 @@ public class RemoveById extends UserCommand {
     }
 
     @Override
-    public Pair<Boolean, String> execute(String arg, Object obj, User user) {
+    public Pair<Boolean, CommandResultContainer> execute(String arg, Object obj, User user) {
 
-        String response;
+        CommandResultContainer container = new CommandResultContainer();
         try {
             if (!arg.trim().matches("\\d+")) {
-                throw new IllegalArgumentException("Неправильный тип аргумента к команде!");
+                throw new IllegalArgumentException();
             }
 
             int id = Integer.parseInt(arg.trim());
             getDatabaseCollectionHandler().deleteMovieById(id, user);
-            boolean wasInCollection = getCollectionStorage().deleteElementForId(id, user);
+            getCollectionStorage().deleteElementForId(id, user);
 
-            if (!wasInCollection) {
-                response = "Среди принадлежащих пользователю элементов нет фильма с таким значением id!";
-            } else {
-                response = "Элемент успешно удален";
-            }
+            return new Pair<>(true, container);
 
-            return new Pair<>(true, response);
-
-        } catch (NumberFormatException e) {
-            response = "Неправильно введен аргумент!";
-        } catch (IllegalArgumentException e) {
-            response = e.getMessage();
-        } catch (SQLException e) {
-            response = "Ошибка при взаимодействии с базой данных";
+        } catch (IllegalArgumentException | SQLException e) {
+            container.setResult("RemoveError");
         }
-        return new Pair<>(false, response);
+        return new Pair<>(false, container);
     }
 }

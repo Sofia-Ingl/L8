@@ -5,12 +5,16 @@ import shared.data.*;
 
 import java.io.EOFException;
 import java.io.IOException;
+import java.util.Scanner;
 
 
 /**
  * Класс, реализующий опрос пользователя и создание экземпляров класса Movie на основе полученной информации.
  */
-public class UserElementGetter extends InteractiveConsoleUtils {
+public class UserElementGetter {
+
+    private Scanner scanner = null;
+
 
     public UserElementGetter() {
     }
@@ -167,4 +171,11 @@ public class UserElementGetter extends InteractiveConsoleUtils {
         return country;
     }
 
+    public void setScanner(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
+    public Scanner getScanner() {
+        return scanner;
+    }
 }

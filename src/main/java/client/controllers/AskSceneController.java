@@ -54,7 +54,7 @@ public class AskSceneController {
             clearFields();
             askStage.close();
         } catch (IllegalArgumentException e) {
-            AlertManager.message("WRONG ARGUMENTS", "Check if every field is correct", Alert.AlertType.ERROR);
+            AlertManager.displayError("WrongArgsError");
         }
     }
 

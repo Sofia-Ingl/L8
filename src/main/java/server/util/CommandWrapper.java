@@ -5,6 +5,7 @@ import server.Server;
 import server.commands.abstracts.Command;
 import server.commands.abstracts.UserCommand;
 import server.commands.abstracts.InnerServerCommand;
+import server.commands.util.CommandResultContainer;
 import shared.serializable.ClientRequest;
 import shared.serializable.Pair;
 import shared.serializable.ServerResponse;
@@ -67,17 +68,17 @@ public class CommandWrapper {
     public ServerResponse processRequest(ClientRequest request, boolean isTechnical) {
 
         Server.logger.info("Исполняется команда {}", request.getCommand());
-        Pair<Boolean, String> commandResult = executeCommand(request.getCommand(), isTechnical, request.getCommandArgument(), request.getCreatedObject(), request.getUser());
+        Pair<Boolean,  CommandResultContainer> commandResult = executeCommand(request.getCommand(), isTechnical, request.getCommandArgument(), request.getCreatedObject(), request.getUser());
 
         CommandExecutionCode code = commandResult.getFirst() ? CommandExecutionCode.SUCCESS : CommandExecutionCode.ERROR;
         if (request.getCommand().equals("exit")) {
             code = CommandExecutionCode.EXIT;
         }
 
-        return new ServerResponse(code, commandResult.getSecond(), collectionStorage.getCollection());
+        return new ServerResponse(code, commandResult.getSecond().getResult(), commandResult.getSecond().getResultArgs(), collectionStorage.getCollection());
     }
 
-    public Pair<Boolean, String> executeCommand(String commandName, boolean isTechnical, String arg, Object obj, User user) {
+    public Pair<Boolean, CommandResultContainer> executeCommand(String commandName, boolean isTechnical, String arg, Object obj, User user) {
         Command command = isTechnical ? allInnerCommands.get(commandName) : allCommandsAvailable.get(commandName);
         try {
             if (command.isNeedsStorageAccess()) {
@@ -86,7 +87,7 @@ public class CommandWrapper {
             if (command.isWrittenToHistory()) {
                 historyLock.lock();
             }
-            Pair<Boolean, String> result = command.execute(arg, obj, user);
+            Pair<Boolean, CommandResultContainer> result = command.execute(arg, obj, user);
             if (command.isWrittenToHistory() && result.getFirst()) {
                 updateHistory(command);
             }

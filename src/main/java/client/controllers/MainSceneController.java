@@ -192,7 +192,7 @@ public class MainSceneController {
                 movie.setOwner(user);
                 processRequest("update", String.valueOf(id), movie);
             } else {
-                AlertManager.message("", "Object not chosen", Alert.AlertType.ERROR);
+                AlertManager.displayError("ChoiceError");
             }
         } catch (IllegalStateException ignored) {
         }
@@ -205,7 +205,7 @@ public class MainSceneController {
 
 
     public void refreshButtonOnAction() {
-        processRequest("show");
+        processRequest("refresh");
     }
 
     public void refreshCanvas(boolean canvasIsChosen) {
@@ -345,7 +345,7 @@ public class MainSceneController {
             String screenwriter = movieTable.getSelectionModel().getSelectedItem().getScreenwriter().getName();
             processRequest("remove_all_by_screenwriter", screenwriter, null);
         } else {
-            AlertManager.message("", "Object not chosen", Alert.AlertType.ERROR);
+            AlertManager.displayError("ChoiceError");
         }
     }
 
@@ -354,7 +354,7 @@ public class MainSceneController {
             int id = movieTable.getSelectionModel().getSelectedItem().getId();
             processRequest("remove_by_id", String.valueOf(id), null);
         } else {
-            AlertManager.message("", "Object not chosen", Alert.AlertType.ERROR);
+            AlertManager.displayError("ChoiceError");
         }
     }
 

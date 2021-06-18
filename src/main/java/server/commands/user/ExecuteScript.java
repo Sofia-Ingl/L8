@@ -1,6 +1,7 @@
 package server.commands.user;
 
 import server.commands.abstracts.UserCommand;
+import server.commands.util.CommandResultContainer;
 import shared.serializable.Pair;
 import shared.serializable.User;
 
@@ -14,19 +15,18 @@ public class ExecuteScript extends UserCommand {
     }
 
     @Override
-    public Pair<Boolean, String> execute(String arg, Object obj, User user) {
+    public Pair<Boolean, CommandResultContainer> execute(String arg, Object obj, User user) {
 
-        String errorString;
-
+        CommandResultContainer container = new CommandResultContainer();
         try {
             if (arg.isEmpty()) {
-                throw new IllegalArgumentException("Неверное число аргументов при использовании команды " + this.getName());
+                throw new IllegalArgumentException("ScriptError");
             }
-            return new Pair<>(true, "Сервер готов к исполнению команд из скрипта " + arg);
+            return new Pair<>(true, container);
 
         } catch (IllegalArgumentException e) {
-            errorString = e.getMessage();
+            container.setResult(e.getMessage());
         }
-        return new Pair<>(false, errorString);
+        return new Pair<>(false, container);
     }
 }

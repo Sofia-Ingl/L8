@@ -6,7 +6,6 @@ import server.commands.abstracts.InnerServerCommand;
 import server.commands.abstracts.UserCommand;
 import server.commands.inner.Login;
 import server.commands.inner.Register;
-import server.commands.inner.SendCommands;
 import server.commands.user.*;
 import server.util.*;
 import shared.serializable.Pair;
@@ -36,9 +35,9 @@ public class Server implements Runnable {
         CollectionStorage collectionStorage = new CollectionStorage(databaseCollectionHandler);
         collectionStorage.loadCollectionFromDatabase();
 
-        InnerServerCommand[] innerServerCommands = {new Login(), new Register(), new SendCommands()};
-        UserCommand[] userCommands = {new Help(), new History(), new Clear(), new Add(), new Show(), new ExecuteScript(),
-                new GoldenPalmsFilter(), new Info(), new AddIfMax(), new PrintAscending(), new RemoveAllByScreenwriter(),
+        InnerServerCommand[] innerServerCommands = {new Login(), new Register()};
+        UserCommand[] userCommands = {new Help(), new History(), new Clear(), new Add(), new Refresh(), new ExecuteScript(),
+                new GoldenPalmsFilter(), new Info(), new AddIfMax(), new RemoveAllByScreenwriter(),
                 new RemoveById(), new RemoveGreater(), new Update(), new Exit()};
 
         Server server = new Server(databaseAddrUserAndPort.getSecond(), new CommandWrapper(collectionStorage, databaseCollectionHandler, userHandler, userCommands, innerServerCommands));

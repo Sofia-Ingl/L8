@@ -1,4 +1,4 @@
-package server.commands.inner;
+/*package server.commands.inner;
 
 import server.commands.abstracts.InnerServerCommand;
 import shared.serializable.Pair;
@@ -15,3 +15,5 @@ public class SendCommands extends InnerServerCommand {
         return new Pair<>(true, "Высылается список команд");
     }
 }
+
+ */

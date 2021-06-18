@@ -1,8 +1,11 @@
 package server.commands.user;
 
 import server.commands.abstracts.UserCommand;
+import server.commands.util.CommandResultContainer;
 import shared.serializable.Pair;
 import shared.serializable.User;
+
+import java.awt.*;
 
 public class Exit extends UserCommand {
 
@@ -11,9 +14,10 @@ public class Exit extends UserCommand {
     }
 
     @Override
-    public Pair<Boolean, String> execute(String arg, Object obj, User user) {
+    public Pair<Boolean, CommandResultContainer> execute(String arg, Object obj, User user) {
 
-        return new Pair<>(true, "Клиент завершил работу с помощью команды exit");
+        CommandResultContainer container = new CommandResultContainer();
+        return new Pair<>(true, container);
 
     }
 }

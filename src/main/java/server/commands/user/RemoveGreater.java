@@ -2,6 +2,7 @@ package server.commands.user;
 
 
 import server.commands.abstracts.UserCommand;
+import server.commands.util.CommandResultContainer;
 import shared.data.Movie;
 import shared.serializable.Pair;
 import shared.serializable.User;
@@ -16,26 +17,20 @@ public class RemoveGreater extends UserCommand {
     }
 
     @Override
-    public Pair<Boolean, String> execute(String arg, Object obj, User user) {
+    public Pair<Boolean, CommandResultContainer> execute(String arg, Object obj, User user) {
 
-        String response;
+        CommandResultContainer container = new CommandResultContainer();
         Movie movieToCompareWith = (Movie) obj;
-        boolean isDeleted;
 
         try {
             getDatabaseCollectionHandler().removeGreaterMovies(movieToCompareWith, user, getCollectionStorage());
-            isDeleted = getCollectionStorage().removeGreater(movieToCompareWith, user);
+            getCollectionStorage().removeGreater(movieToCompareWith, user);
 
-            if (!isDeleted) {
-                response = "В коллекции не было принадлежащих пользователю элементов, которые превосходят заданный";
-            } else {
-                response = "Принадлежащие пользователю элементы больше заданного успешно удалены из коллекции";
-            }
-            return new Pair<>(true, response);
+            return new Pair<>(true, container);
         } catch (SQLException e) {
-            response = "Возникла ошибка при обращении к базе данных";
+            container.setResult("RemoveGreaterError");
         }
-        return new Pair<>(false, response);
+        return new Pair<>(false, container);
     }
 }
 

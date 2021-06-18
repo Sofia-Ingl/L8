@@ -1,6 +1,7 @@
 package server.commands.user;
 
 import server.commands.abstracts.UserCommand;
+import server.commands.util.CommandResultContainer;
 import shared.data.Movie;
 import shared.serializable.Pair;
 import shared.serializable.User;
@@ -17,9 +18,9 @@ public class Update extends UserCommand {
     }
 
     @Override
-    public Pair<Boolean, String> execute(String arg, Object obj, User user) {
+    public Pair<Boolean, CommandResultContainer> execute(String arg, Object obj, User user) {
 
-        String response;
+        CommandResultContainer container = new CommandResultContainer();
         try {
             if (!arg.trim().matches("\\d+")) {
                 throw new IllegalArgumentException("Неправильный тип аргумента к команде!");
@@ -38,22 +39,16 @@ public class Update extends UserCommand {
                     m1.setGoldenPalmCount(m2.getGoldenPalmCount());
                     m1.setTagline(m2.getTagline());
                     m1.setScreenwriter(m2.getScreenwriter());
-                    response = "Элемент успешно обновлен";
-                } else {
-                    response = "Нет принадлежащего пользователю элемента с таким значением id!";
-                }
-
+                } else throw new IllegalAccessException();
             }
 
-            return new Pair<>(true, response);
+            return new Pair<>(true, container);
 
-        } catch (NumberFormatException e) {
-            response = "Неправильно введен аргумент!";
-        } catch (IllegalArgumentException e) {
-            response = e.getMessage();
-        } catch (SQLException e) {
-            response = "Произошла ошибка при обращении к базе данных";
+        } catch (IllegalArgumentException | SQLException e) {
+            container.setResult("UpdateError");
+        } catch (IllegalAccessException e) {
+            container.setResult("AccessError");
         }
-        return new Pair<>(false, response);
+        return new Pair<>(false, container);
     }
 }

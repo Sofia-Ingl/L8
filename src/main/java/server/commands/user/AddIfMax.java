@@ -1,6 +1,7 @@
 package server.commands.user;
 
 import server.commands.abstracts.UserCommand;
+import server.commands.util.CommandResultContainer;
 import shared.data.Movie;
 import shared.serializable.Pair;
 import shared.serializable.User;
@@ -15,26 +16,23 @@ public class AddIfMax extends UserCommand {
 
 
     @Override
-    public Pair<Boolean, String> execute(String arg, Object obj, User user) {
+    public Pair<Boolean, CommandResultContainer> execute(String arg, Object obj, User user) {
 
-        String response;
+        CommandResultContainer container = new CommandResultContainer();
         Movie newMovie = (Movie) obj;
-
         try {
 
             if (getCollectionStorage().getMaxMovie() == null || getCollectionStorage().getMaxMovie().compareTo(newMovie) < 0) {
 
                 newMovie = getDatabaseCollectionHandler().addNewMovie(newMovie, user);
                 getCollectionStorage().addMovie(newMovie);
-                response = "Предложенный вами фильм превосходит максимальный в коллекции => он будет добавлен.";
-            } else {
-                response = "Предложенный фильм максимальным не является => он не будет добавлен";
             }
-            return new Pair<>(true, response);
+
+            return new Pair<>(true, container);
 
         } catch (SQLException e) {
-            response = "Произошла ошибка при добавлении фильма в базу данных";
+            container.setResult("AddIfMaxError");
         }
-        return new Pair<>(false, response);
+        return new Pair<>(false, container);
     }
 }

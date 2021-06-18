@@ -1,6 +1,7 @@
 package server.commands.inner;
 
 import server.commands.abstracts.InnerServerCommand;
+import server.commands.util.CommandResultContainer;
 import shared.serializable.Pair;
 import shared.serializable.User;
 
@@ -14,20 +15,20 @@ public class Register extends InnerServerCommand {
     }
 
     @Override
-    public Pair<Boolean, String> execute(String arg, Object obj, User user) {
+    public Pair<Boolean, CommandResultContainer> execute(String arg, Object obj, User user) {
 
-        String answer;
+        CommandResultContainer container = new CommandResultContainer();
         try {
             boolean successfullyInserted = getUserHandler().insertUser(user);
             if (!successfullyInserted) {
-                throw new AccessDeniedException("Пользователь с таким именем уже есть в базе!");
+                throw new AccessDeniedException("UserInsertionError");
             }
-            return new Pair<>(true, "Пользователь успешно зарегистрирован");
+            return new Pair<>(true, container);
         } catch (SQLException e) {
-            answer = "Ошибка при обращении к базе данных, регистрация не осуществлена";
+            container.setResult("RegisterError");
         } catch (AccessDeniedException e) {
-            answer = e.getMessage();
+            container.setResult(e.getMessage());
         }
-        return new Pair<>(false, answer);
+        return new Pair<>(false, container);
     }
 }

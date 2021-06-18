@@ -5,6 +5,7 @@ import shared.util.CommandExecutionCode;
 
 import java.io.Serializable;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 public class ServerResponse implements Serializable {
 
@@ -13,15 +14,18 @@ public class ServerResponse implements Serializable {
     private LinkedHashSet<Movie> movieSet;
     private final String responseBody;
     private final CommandExecutionCode code;
+    private final List<String> responseBodyArgs;
+//
+//    public ServerResponse(CommandExecutionCode code, String responseToPrint, List<String> responseBodyArgs) {
+//        this.code = code;
+//        this.responseBody = responseToPrint;
+//        this.responseBodyArgs = responseBodyArgs;
+//    }
 
-    public ServerResponse(CommandExecutionCode code, String responseToPrint) {
+    public ServerResponse(CommandExecutionCode code, String responseToPrint, List<String> responseBodyArgs, LinkedHashSet<Movie> movieSet) {
         this.code = code;
         this.responseBody = responseToPrint;
-    }
-
-    public ServerResponse(CommandExecutionCode code, String responseToPrint, LinkedHashSet<Movie> movieSet) {
-        this.code = code;
-        this.responseBody = responseToPrint;
+        this.responseBodyArgs = responseBodyArgs;
         this.movieSet = movieSet;
     }
 
@@ -35,6 +39,10 @@ public class ServerResponse implements Serializable {
 
     public LinkedHashSet<Movie> getMovieSet() {
         return movieSet;
+    }
+
+    public List<String> getResponseBodyArgs() {
+        return responseBodyArgs;
     }
 
     @Override

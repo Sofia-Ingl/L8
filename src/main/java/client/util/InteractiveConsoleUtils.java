@@ -1,3 +1,5 @@
+/*
+
 package client.util;
 
 import java.io.*;
@@ -45,3 +47,5 @@ public abstract class InteractiveConsoleUtils {
 
 
 }
+
+ */

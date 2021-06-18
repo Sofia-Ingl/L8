@@ -1,6 +1,7 @@
 package server.commands.inner;
 
 import server.commands.abstracts.InnerServerCommand;
+import server.commands.util.CommandResultContainer;
 import server.util.DatabaseCollectionHandler;
 import shared.serializable.Pair;
 import shared.serializable.User;
@@ -17,21 +18,19 @@ public class Login extends InnerServerCommand {
     }
 
     @Override
-    public Pair<Boolean, String> execute(String arg, Object obj, User user) {
+    public Pair<Boolean, CommandResultContainer> execute(String arg, Object obj, User user) {
 
-        String answer;
+        CommandResultContainer container = new CommandResultContainer();
         try {
-            if (getUserHandler().findUserByNameAndPass(user)) {
-                answer = "Пользователь был найден в базе данных, пароль верный";
-            } else {
-                throw new AccessDeniedException("Неверно указано имя или пароль");
+            if (!getUserHandler().findUserByNameAndPass(user)) {
+                throw new AccessDeniedException("WrongNameOrPassError");
             }
-            return new Pair<>(true, answer);
+            return new Pair<>(true, container);
         } catch (SQLException e) {
-            answer = "Произошла ошибка при обращении к базе данных";
+            container.setResult("LoginError");
         } catch (AccessDeniedException e) {
-            answer = e.getMessage();
+            container.setResult(e.getMessage());
         }
-        return new Pair<>(false, answer);
+        return new Pair<>(false, container);
     }
 }

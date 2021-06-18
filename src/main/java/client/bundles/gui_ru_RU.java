@@ -12,13 +12,12 @@ public class gui_ru_RU extends ListResourceBundle {
     private static final Object[][] contents = {
 
             {"CommandSuccess","Команда выполнена успешно"},
-            //{"AddSuccess", "Элемент добавлен в коллекцию!"},
             {"AddError","Возникла ошибка при добавлении фильма в базу данных"},
             {"AddIfMaxError", "Ошибка добавления максимального элемента"},
-            //{"AddIfMaxSuccess", "Максимальный элемент успешно добавлен"},
-            //{"AddIfMaxNotSuccess", "Элемент не был максимальным, в коллекцию не добавлен"},
             {"ScriptError", "Во время выполнения скрипта произошла ошибка"},
             {"RegisterError", "Ошибка при регистрации"},
+            {"UserInsertionError", "Пользователь с таким именем уже есть в базе данных!"},
+            {"WrongNameOrPassError", "Неверное имя или пароль!"},
             {"LoginError", "Ошибка при входе в учетную запись"},
             {"RemoveError", "Ошибка при удалении элемента"},
             {"RemoveGreaterError", "Ошибка при удалении больших элементов"},
@@ -50,7 +49,7 @@ public class gui_ru_RU extends ListResourceBundle {
             {"visualTab", "Визуализация"},
             {"tableTab","Таблица"},
 
-            {"addButton", "Добавить элемент"},
+            {"addButton", "Добавить"},
             {"addIfMaxButton", "Добавить макс. элемент"},
             {"clearButton", "Очистить"},
             {"executeScriptButton", "Исполнить скипт"},
@@ -72,6 +71,27 @@ public class gui_ru_RU extends ListResourceBundle {
             {"passwordLabel", "Пароль"},
             {"registerCheckBox", "Регистрация"},
             {"signInButton", "Подтвердить"},
+
+            {"WrongArgsError", "Не все аргументы допустимы. Проверьте корректность введенных данных"},
+            {"ChoiceError", "Объект не выбран!"},
+
+            {"History", "История:"},
+            {"add", "Добавить"},
+            {"add_if_max", "Добавить макс. элемент"},
+            {"clear", "Очистить"},
+            {"execute_script", "Исполнить скрипт"},
+            {"filter_greater_than_golden_palm_count", "Оставить фильмы с большим числом пальмовых ветвей"},
+            {"help", "Помощь"},
+            {"history", "История"},
+            {"info", "Информация"},
+            {"remove_all_by_screenwriter", "Удалить по сценаристу"},
+            {"remove_by_id", "Удалить по id"},
+            {"remove_greater", "Удалить большие"},
+            {"update", "Обновить элемент"},
+            {"refresh", "Обновить"},
+
+            {"AccessError", "Попытка обновить элемент, не принадлежащий пользователю!"},
+            {"Error", "Ошибка!"}
 
     };
 

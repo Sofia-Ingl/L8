@@ -13,7 +13,9 @@ public class gui_en_CA extends ListResourceBundle {
             //{"AddIfMaxNotSuccess", "Элемент не был максимальным, в коллекцию не добавлен"},
             {"ScriptError", "Error while script processing"},
             {"RegisterError", "Error while processing registration"},
+            {"UserInsertionError", "User with the same name is already in db!"},
             {"LoginError", "Error while logging in system"},
+            {"WrongNameOrPassError", "Wrong name or password!"},
             {"RemoveError", "Error while removing"},
             {"RemoveGreaterError", "Error while removing greater"},
             {"RemoveByScreenwriterError", "Error while removing by screenwriter"},
@@ -66,6 +68,27 @@ public class gui_en_CA extends ListResourceBundle {
             {"passwordLabel", "Password"},
             {"registerCheckBox", "Register"},
             {"signInButton", "Sign in"},
+
+            {"WrongArgsError", "Forbidden args were provided. Check if every field is correct"},
+            {"ChoiceError", "Object not chosen!"},
+
+            {"History", "History:"},
+            {"add", "Add"},
+            {"add_if_max", "Add if max"},
+            {"clear", "Clear"},
+            {"execute_script", "Execute script"},
+            {"filter_greater_than_golden_palm_count", "Filter greater than golden palms"},
+            {"help", "Help"},
+            {"history", "History"},
+            {"info", "Info"},
+            {"remove_all_by_screenwriter", "Remove by screenwriter"},
+            {"remove_by_id", "Remove by id"},
+            {"remove_greater", "Remove greater"},
+            {"update", "Update"},
+            {"refresh", "Refresh"},
+
+            {"AccessError", "Attempt to update movie that does not belong to user!"},
+            {"Error", "Error!"}
 
     };
 

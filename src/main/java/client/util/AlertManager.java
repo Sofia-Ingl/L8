@@ -11,11 +11,15 @@ public class AlertManager {
         localization = loc;
     }
 
-    public static void message(String title, String body, AlertType type) {
+    private static void message(String title, String body, AlertType type) {
         Alert alert = new Alert(type);
-        alert.setTitle(title);
+        alert.setTitle(localization.getStringBinding(title));
         alert.setHeaderText(null);
-        alert.setContentText(body);
+        alert.setContentText(localization.getStringBinding(body));
         alert.showAndWait();
+    }
+
+    public static void displayError(String errorText) {
+        message("Error", errorText, AlertType.ERROR);
     }
 }

@@ -1,6 +1,7 @@
 package server.commands.user;
 
 import server.commands.abstracts.UserCommand;
+import server.commands.util.CommandResultContainer;
 import shared.serializable.Pair;
 import shared.serializable.User;
 
@@ -13,18 +14,18 @@ public class Clear extends UserCommand {
     }
 
     @Override
-    public Pair<Boolean, String> execute(String arg, Object obj, User user) {
+    public Pair<Boolean, CommandResultContainer> execute(String arg, Object obj, User user) {
 
-        String errorString;
+        CommandResultContainer container = new CommandResultContainer();
         try {
 
             getDatabaseCollectionHandler().deleteAllMoviesBelongToUser(user);
             getCollectionStorage().deleteElementsByUser(user);
 
-            return new Pair<>(true, "Все объекты, принадлежащие пользователю, удалены из коллекции");
+            return new Pair<>(true, container);
         } catch (SQLException e) {
-            errorString = "Произошла ошибка при удалении фильмов, принадлежащих пользователю, из базы данных";
+            container.setResult("ClearError");
         }
-        return new Pair<>(false, errorString);
+        return new Pair<>(false, container);
     }
 }

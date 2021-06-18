@@ -1,6 +1,7 @@
 package server.commands.user;
 
 import server.commands.abstracts.UserCommand;
+import server.commands.util.CommandResultContainer;
 import server.util.DatabaseCollectionHandler;
 import shared.data.Movie;
 import shared.serializable.Pair;
@@ -15,21 +16,20 @@ public class Add extends UserCommand {
     }
 
     @Override
-    public Pair<Boolean, String> execute(String arg, Object obj, User user) {
+    public Pair<Boolean, CommandResultContainer> execute(String arg, Object obj, User user) {
 
-        String errorString;
-
+        CommandResultContainer container = new CommandResultContainer();
         try {
 
             Movie movie = getDatabaseCollectionHandler().addNewMovie((Movie) obj, user);
             getCollectionStorage().addMovie(movie);
 
-            return new Pair<>(true, "Элемент добавлен в коллекцию!");
+            return new Pair<>(true, container);
 
         } catch (SQLException e) {
-            errorString = "Возникла ошибка при добавлении фильма в базу данных";
+            container.setResult("AddError");
         }
 
-        return new Pair<>(false, errorString);
+        return new Pair<>(false, container);
     }
 }

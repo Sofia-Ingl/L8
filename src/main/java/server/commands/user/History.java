@@ -2,6 +2,7 @@ package server.commands.user;
 
 import server.commands.abstracts.Command;
 import server.commands.abstracts.UserCommand;
+import server.commands.util.CommandResultContainer;
 import shared.serializable.Pair;
 import shared.serializable.User;
 
@@ -15,20 +16,15 @@ public class History extends UserCommand {
 
 
     @Override
-    public Pair<Boolean, String> execute(String arg, Object obj, User user) {
+    public Pair<Boolean, CommandResultContainer> execute(String arg, Object obj, User user) {
 
-        StringBuilder builder = new StringBuilder();
-
+        CommandResultContainer container = new CommandResultContainer();
+        container.setResult("History");
         ArrayList<Command> history = getCommandWrapper().getHistory();
-        if (history.size() == 0) {
-            builder.append("История команд пуста.");
-        } else {
-            builder.append("\nИСТОРИЯ (ПОСЛЕДНИЕ 6 ВЫПОЛНЕННЫХ СЕРВЕРОМ КОМАНД, ОТ НОВЫХ К СТАРЫМ)\n");
-            for (int index = 0; index < history.size(); index++) {
-                builder.append(history.get(history.size() - 1 - index).getName()).append("\n");
-            }
+        for (int index = 0; index < history.size(); index++) {
+            container.addResultArg(history.get(history.size() - 1 - index).getName());
         }
 
-        return new Pair<>(true, builder.toString());
+        return new Pair<>(true, container);
     }
 }
