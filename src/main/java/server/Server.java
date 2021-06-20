@@ -39,7 +39,7 @@ public class Server implements Runnable {
         UserCommand refreshCommand = new Refresh();
         refreshCommand.setWrittenToHistory(false);
         UserCommand[] userCommands = {refreshCommand, new Help(), new History(), new Clear(), new Add(), new ExecuteScript(),
-                new GoldenPalmsFilter(), new Info(), new AddIfMax(), new RemoveAllByScreenwriter(),
+                new Info(), new AddIfMax(), new RemoveAllByScreenwriter(),
                 new RemoveById(), new RemoveGreater(), new Update(), new Exit()};
 
 

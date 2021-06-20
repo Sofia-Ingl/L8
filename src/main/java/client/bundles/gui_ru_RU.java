@@ -93,7 +93,23 @@ public class gui_ru_RU extends ListResourceBundle {
             {"AccessError", "Попытка обновить элемент, не принадлежащий пользователю!"},
             {"Error", "Ошибка!"},
             {"Info", "Информация"},
-            {"NewTrial", "Пожалуйста, введите команду снова"}
+            {"NewTrial", "Пожалуйста, введите команду снова"},
+
+            {"MovieDisplay", "Название: %s \nЧисло оскаров: %d \nЧисло пальмовых ветвей: %d \nЖанр: %s \nСценарист: %s"}
+            /*
+            "Movie{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", coordinates=" + coordinates.toString() +
+                ", creationDate=" + creationDate +
+                ", oscarsCount=" + oscarsCount +
+                ", goldenPalmCount=" + goldenPalmCount +
+                ", tagline='" + tagline + '\'' +
+                ", genre=" + genre +
+                ", screenwriter=" + screenwriter +
+                ", owner=" + owner.getLogin() +
+                '}';
+             */
 
     };
 

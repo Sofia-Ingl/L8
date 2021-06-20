@@ -8,8 +8,6 @@ import javafx.animation.TranslateTransition;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -29,9 +27,9 @@ import shared.data.Movie;
 import shared.data.MovieGenre;
 import shared.serializable.Pair;
 import shared.serializable.User;
+import org.controlsfx.control.table.TableFilter;
 
 import java.io.File;
-import java.time.ZonedDateTime;
 import java.util.*;
 
 public class MainSceneController {
@@ -49,9 +47,11 @@ public class MainSceneController {
     private FileChooser fileChooser;
     private Map<Shape, Integer> shapeMap;
     private Map<Integer, Text> textMap;
+    private Map<Integer, Text> infoTextMap;
+    private Map<Integer, Shape> infoMap;
     private Random random;
-    Shape prevClicked = null;
-    javafx.scene.paint.Color prevColor;
+    private Shape prevClicked = null;
+    private javafx.scene.paint.Color prevColor;
 
     @FXML
     private GridPane topPanel;
@@ -110,8 +110,6 @@ public class MainSceneController {
     @FXML
     private Button executeScriptButton;
     @FXML
-    private Button gPalmsFilterButton;
-    @FXML
     private Button helpButton;
     @FXML
     private Button historyButton;
@@ -134,6 +132,8 @@ public class MainSceneController {
         languageChoiceBox.setItems(FXCollections.observableArrayList(sysLocales.keySet()));
         shapeMap = new HashMap<>();
         textMap = new HashMap<>();
+        infoMap = new HashMap<>();
+        infoTextMap = new HashMap<>();
         userColorMap = new HashMap<>();
         fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File("."));
@@ -212,8 +212,12 @@ public class MainSceneController {
 
         shapeMap.keySet().forEach(shape -> visualPane.getChildren().remove(shape));
         textMap.values().forEach(text -> visualPane.getChildren().remove(text));
+        infoMap.values().forEach(info -> visualPane.getChildren().remove(info));
+        infoTextMap.values().forEach(info -> visualPane.getChildren().remove(info));
         shapeMap.clear();
         textMap.clear();
+        infoTextMap.clear();
+        infoMap.clear();
 
         for (Movie m : movieTable.getItems().sorted(Comparator.reverseOrder())) {
 
@@ -224,9 +228,15 @@ public class MainSceneController {
             int size = Math.min(m.getOscarsCount() * 15, 250);
 
             Circle movieCircle = new Circle(size, userColorMap.get(m.getOwner().getLogin()));
+            Text movieText = new Text(String.valueOf(m.getId()));
 
-            double xTranslate = m.getCoordinates().getX()*4;
-            double yTranslate = m.getCoordinates().getY()*1.5;
+            Rectangle info = new Rectangle(250, 120, javafx.scene.paint.Color.valueOf("FCF8F2"));
+            Text infoText = new Text(getMovieInfoString(m));
+            info.setVisible(false);
+            infoText.setVisible(false);
+
+            double xTranslate = m.getCoordinates().getX() * 4;
+            double yTranslate = m.getCoordinates().getY() * 1.5;
 
             if (!canvasIsChosen) {
                 movieCircle.setTranslateX(xTranslate);
@@ -234,20 +244,44 @@ public class MainSceneController {
             }
 
 
-            movieCircle.setOnMouseClicked(this::shapeOnMouseClicked);
+            movieCircle.setOnMouseClicked((event) -> {
+                shapeOnMouseClicked(event);
+                movieText.setVisible(!movieText.isVisible());
+                if (infoText.isVisible()) {
+                    info.toBack();
+                    infoText.toBack();
+                } else {
+                    info.toFront();
+                    infoText.toFront();
+                }
+                info.setVisible(!info.isVisible());
+                infoText.setVisible(!infoText.isVisible());
 
-            Text movieText = new Text(String.valueOf(m.getId()));
+            });
+
             movieText.setFont(Font.font(size / 2));
             movieText.setOnMouseClicked(movieCircle::fireEvent);
             movieText.setFill(userColorMap.get(m.getOwner().getLogin()).darker().darker());
             movieText.translateXProperty().bind(movieCircle.translateXProperty().subtract(movieText.getLayoutBounds().getWidth() / 2));
             movieText.translateYProperty().bind(movieCircle.translateYProperty().add(movieText.getLayoutBounds().getHeight() / 4));
 
+            info.translateXProperty().bind(movieCircle.translateXProperty().subtract(movieText.getLayoutBounds().getWidth() / 2));
+            info.translateYProperty().bind(movieCircle.translateYProperty().add(movieText.getLayoutBounds().getHeight()/4));
+
+            infoText.setFont(Font.font(16));
+            infoText.setFill(javafx.scene.paint.Color.BLACK);
+            infoText.translateXProperty().bind(info.translateXProperty().add(5));
+            infoText.translateYProperty().bind(info.translateYProperty().add(20));
+
             visualPane.getChildren().add(movieCircle);
             visualPane.getChildren().add(movieText);
+            visualPane.getChildren().add(info);
+            visualPane.getChildren().add(infoText);
 
             shapeMap.put(movieCircle, m.getId());
             textMap.put(m.getId(), movieText);
+            infoMap.put(m.getId(), info);
+            infoTextMap.put(m.getId(), infoText);
 
             if (canvasIsChosen) {
 
@@ -311,6 +345,7 @@ public class MainSceneController {
             ObservableList<Movie> movieList = FXCollections.observableArrayList(set);
             movieTable.setItems(movieList);
             movieTable.getSelectionModel().clearSelection();
+            TableFilter.forTableView(movieTable).apply();
             refreshCanvas(false);
         }
     }
@@ -422,7 +457,6 @@ public class MainSceneController {
         addIfMaxButton.setText(localization.getStringBinding("addIfMaxButton"));
         clearButton.setText(localization.getStringBinding("clearButton"));
         executeScriptButton.setText(localization.getStringBinding("executeScriptButton"));
-        gPalmsFilterButton.setText(localization.getStringBinding("gPalmsFilterButton"));
         helpButton.setText(localization.getStringBinding("helpButton"));
         historyButton.setText(localization.getStringBinding("historyButton"));
         infoButton.setText(localization.getStringBinding("infoButton"));
@@ -451,9 +485,6 @@ public class MainSceneController {
         }
     }
 
-    public void gPalmsFilterButtonOnAction(ActionEvent actionEvent) {
-    }
-
     public void helpButtonOnAction() {
         processRequest("help");
     }
@@ -464,5 +495,9 @@ public class MainSceneController {
 
     public void infoOnAction() {
         processRequest("info");
+    }
+
+    private String getMovieInfoString(Movie m) {
+        return String.format(localization.getStringBinding("MovieDisplay"), m.getName(), m.getOscarsCount(), m.getGoldenPalmCount(), m.getGenre(), m.getScreenwriter().getName());
     }
 }

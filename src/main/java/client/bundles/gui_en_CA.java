@@ -90,7 +90,9 @@ public class gui_en_CA extends ListResourceBundle {
             {"AccessError", "Attempt to update movie that does not belong to user!"},
             {"Error", "Error!"},
             {"Info", "Info"},
-            {"NewTrial", "Pls, make another trial to execute command"}
+            {"NewTrial", "Pls, make another trial to execute command"},
+
+            {"MovieDisplay", "Name: %s \nOscars: %s \nGolden palms: %s \nGenre: %s \nScreenwriter: %s"}
 
     };
 
