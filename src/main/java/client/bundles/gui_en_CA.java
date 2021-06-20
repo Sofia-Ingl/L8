@@ -26,7 +26,7 @@ public class gui_en_CA extends ListResourceBundle {
                     "To perform deletion or update actions, you must select a table row." +
                     "The \" Clear \"command removes from the database only those objects that belong to you. \n" +
                     "In the \" Visualization \"section, you will find a visual representation of the database objects."},
-            //{"InfoMessage", "Информация о коллекции: \n Дата доступа: {0} \n Тип: {1} \n Размер: {2}"},
+            {"InfoText", "Collection info:\n Object type: %s \n Size: %s \n Init time: %s \n"},
 
             {"idColumn", "Id"},
             {"nameColumn", "Name"},
@@ -72,7 +72,7 @@ public class gui_en_CA extends ListResourceBundle {
             {"WrongArgsError", "Forbidden args were provided. Check if every field is correct"},
             {"ChoiceError", "Object not chosen!"},
 
-            {"History", "History:"},
+            {"History", "History (from new to old):"},
             {"add", "Add"},
             {"add_if_max", "Add if max"},
             {"clear", "Clear"},
@@ -88,7 +88,9 @@ public class gui_en_CA extends ListResourceBundle {
             {"refresh", "Refresh"},
 
             {"AccessError", "Attempt to update movie that does not belong to user!"},
-            {"Error", "Error!"}
+            {"Error", "Error!"},
+            {"Info", "Info"},
+            {"NewTrial", "Pls, make another trial to execute command"}
 
     };
 

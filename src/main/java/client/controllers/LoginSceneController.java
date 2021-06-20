@@ -91,19 +91,6 @@ public class LoginSceneController extends Controller {
 
     }
 
-    class AnimationTask implements Runnable {
-        private RotateTransition rotateTransition;
-
-        public AnimationTask(RotateTransition rt) {
-            rotateTransition = rt;
-        }
-
-        @Override
-        public void run() {
-            rotateTransition.play();
-        }
-    }
-
     public void setClient(Client client) {
         this.client = client;
     }

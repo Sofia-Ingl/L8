@@ -3,7 +3,6 @@ package client;
 import client.util.AlertManager;
 import client.util.Encryption;
 import client.util.ScriptProcessor;
-import javafx.scene.control.Alert;
 import shared.data.Movie;
 import shared.exceptions.ScriptException;
 import shared.serializable.ClientRequest;
@@ -20,7 +19,6 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 
@@ -71,19 +69,36 @@ public class Client {
         return false;
     }
 
+    private void reAuthorisation() {
+        ServerResponse response;
+        ClientRequest request;
+        request = new ClientRequest("login", "", null, user);
+        try {
+            processRequest(request);
+        } catch (IOException | ClassNotFoundException ignored) {
+        }
+    }
+
     public LinkedHashSet<Movie> processUserRequest(String command, String commandArg, Movie obj) {
         ServerResponse response;
         ClientRequest request = new ClientRequest(command, commandArg, obj, user);
         try {
             response = processRequest(request);
-            if (response.getCode().equals(CommandExecutionCode.ERROR)) {
-                AlertManager.displayError(response.getResponseToPrint());
+            if (!response.getResponseToPrint().equals("")) {
+                if (response.getCode().equals(CommandExecutionCode.ERROR)) {
+                    AlertManager.displayError(response.getResponseToPrint());
+                } else {
+                    AlertManager.displayCommandResult(request.getCommand(), response);
+                }
             }
             return response.getMovieSet();
         } catch (IOException e) {
             try {
                 resetConnection();
-            } catch (IOException ignored) {
+                reAuthorisation();
+                AlertManager.displayInfo("NewTrial");
+            } catch (IOException exception) {
+                AlertManager.displayError("ConnectionError");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -110,8 +125,16 @@ public class Client {
                 }
             }
             return new Pair<>(Boolean.TRUE, movies);
-        } catch (ScriptException | IOException | ClassNotFoundException e) {
+        } catch (ScriptException | ClassNotFoundException e) {
             AlertManager.displayError("ScriptError");
+        } catch (IOException e) {
+                try {
+                    resetConnection();
+                    reAuthorisation();
+                    AlertManager.displayInfo("NewTrial");
+                } catch (IOException exception) {
+                    AlertManager.displayError("ConnectionError");
+                }
         }
         return new Pair<>(Boolean.FALSE, movies);
     }

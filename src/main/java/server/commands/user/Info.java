@@ -6,6 +6,8 @@ import server.util.CollectionStorage;
 import shared.serializable.Pair;
 import shared.serializable.User;
 
+import java.time.format.DateTimeFormatter;
+
 public class Info extends UserCommand {
 
     public Info() {
@@ -16,13 +18,13 @@ public class Info extends UserCommand {
     public Pair<Boolean, CommandResultContainer> execute(String arg, Object obj, User user) {
 
         CommandResultContainer container = new CommandResultContainer();
-        container.setResult("Info");
+        container.setResult("InfoText");
 
         CollectionStorage storage = getCollectionStorage();
-        container.addResultArg(storage.getTypes()[0].toString());
-        container.addResultArg(storage.getTypes()[1].toString());
+
+        container.addResultArg(storage.getTypes()[1].getTypeName());
         container.addResultArg(String.valueOf(storage.getCollection().size()));
-        container.addResultArg(storage.getInitTime().toString());
+        container.addResultArg(storage.getInitTime().format(DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss")));
         /*
         info = "\n" + "ИНФОРМАЦИЯ О КОЛЛЕКЦИИ" + "\n"
                 + "Тип коллекции: " + storage.getTypes()[0] + ", тип хранимых объектов: " + storage.getTypes()[1] + "\n"

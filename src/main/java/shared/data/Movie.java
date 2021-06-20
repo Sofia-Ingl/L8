@@ -4,6 +4,7 @@ import shared.serializable.User;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -91,6 +92,11 @@ public class Movie implements Comparable<Movie>, Serializable {
 
     public void setCreationDate(ZonedDateTime creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getCreationDateString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss z");
+        return creationDate.format(formatter);
     }
 
     public void setId(int id) {

@@ -11,7 +11,7 @@ public abstract class Command implements Executables {
     private final boolean hasStringArg;
 
     private final boolean needsStorageAccess;
-    private final boolean isWrittenToHistory;
+    private boolean isWrittenToHistory;
     private CommandWrapper commandWrapper = null;
     private CollectionStorage collectionStorage = null;
     private UserHandler userHandler = null;
@@ -80,6 +80,10 @@ public abstract class Command implements Executables {
 
     public boolean isWrittenToHistory() {
         return isWrittenToHistory;
+    }
+
+    public void setWrittenToHistory(boolean writtenToHistory) {
+        isWrittenToHistory = writtenToHistory;
     }
 }
 

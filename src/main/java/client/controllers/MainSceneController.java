@@ -80,7 +80,7 @@ public class MainSceneController {
     @FXML
     private TableColumn<Movie, Integer> yColumn;
     @FXML
-    private TableColumn<Movie, ZonedDateTime> creationDateColumn;
+    private TableColumn<Movie, String> creationDateColumn;
     @FXML
     private TableColumn<Movie, Integer> oscarsColumn;
     @FXML
@@ -149,7 +149,7 @@ public class MainSceneController {
         oscarsColumn.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getOscarsCount()));
         gPalmsColumn.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getGoldenPalmCount()));
         taglineColumn.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getTagline()));
-        creationDateColumn.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getCreationDate()));
+        creationDateColumn.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getCreationDateString()));
         genreColumn.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getGenre()));
         scrNameColumn.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getScreenwriter().getName()));
         scrHeightColumn.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getScreenwriter().getHeight()));
@@ -449,5 +449,20 @@ public class MainSceneController {
             refreshCanvas(false);
 
         }
+    }
+
+    public void gPalmsFilterButtonOnAction(ActionEvent actionEvent) {
+    }
+
+    public void helpButtonOnAction() {
+        processRequest("help");
+    }
+
+    public void historyButtonOnAction() {
+        processRequest("history");
+    }
+
+    public void infoOnAction() {
+        processRequest("info");
     }
 }

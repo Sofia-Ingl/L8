@@ -36,9 +36,12 @@ public class Server implements Runnable {
         collectionStorage.loadCollectionFromDatabase();
 
         InnerServerCommand[] innerServerCommands = {new Login(), new Register()};
-        UserCommand[] userCommands = {new Help(), new History(), new Clear(), new Add(), new Refresh(), new ExecuteScript(),
+        UserCommand refreshCommand = new Refresh();
+        refreshCommand.setWrittenToHistory(false);
+        UserCommand[] userCommands = {refreshCommand, new Help(), new History(), new Clear(), new Add(), new ExecuteScript(),
                 new GoldenPalmsFilter(), new Info(), new AddIfMax(), new RemoveAllByScreenwriter(),
                 new RemoveById(), new RemoveGreater(), new Update(), new Exit()};
+
 
         Server server = new Server(databaseAddrUserAndPort.getSecond(), new CommandWrapper(collectionStorage, databaseCollectionHandler, userHandler, userCommands, innerServerCommands));
         addShutdownHook(databaseManager, server.fixedThreadPool);
