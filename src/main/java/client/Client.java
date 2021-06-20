@@ -140,7 +140,7 @@ public class Client {
     }
 
 
-    private ServerResponse processRequest(ClientRequest request) throws IOException, ClassNotFoundException {
+    synchronized private ServerResponse processRequest(ClientRequest request) throws IOException, ClassNotFoundException {
         socketChannel.register(selector, SelectionKey.OP_WRITE);
         selector.select();
         sendClientRequest(request);

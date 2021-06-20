@@ -31,6 +31,8 @@ import org.controlsfx.control.table.TableFilter;
 
 import java.io.File;
 import java.util.*;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class MainSceneController {
 
@@ -266,7 +268,7 @@ public class MainSceneController {
             movieText.translateYProperty().bind(movieCircle.translateYProperty().add(movieText.getLayoutBounds().getHeight() / 4));
 
             info.translateXProperty().bind(movieCircle.translateXProperty().subtract(movieText.getLayoutBounds().getWidth() / 2));
-            info.translateYProperty().bind(movieCircle.translateYProperty().add(movieText.getLayoutBounds().getHeight()/4));
+            info.translateYProperty().bind(movieCircle.translateYProperty().add(movieText.getLayoutBounds().getHeight() / 4));
 
             infoText.setFont(Font.font(16));
             infoText.setFill(javafx.scene.paint.Color.BLACK);
@@ -287,20 +289,19 @@ public class MainSceneController {
 
                 TranslateTransition circleTransition = getNodeTranslateTransition(movieCircle, xTranslate, yTranslate);
                 circleTransition.play();
+
+            } else {
+                ScaleTransition circleTransition = getNodeScaleTransition(movieCircle);
+                ScaleTransition textTransition = getNodeScaleTransition(movieText);
+                circleTransition.play();
+                textTransition.play();
             }
-
-            ScaleTransition circleTransition = getNodeScaleTransition(movieCircle);
-            ScaleTransition textTransition = getNodeScaleTransition(movieText);
-
-            circleTransition.play();
-            textTransition.play();
-
 
         }
     }
 
     private TranslateTransition getNodeTranslateTransition(Node node, double transX, double transY) {
-        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(2000), node);
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), node);
         translateTransition.setByX(transX);
         translateTransition.setByY(transY);
         translateTransition.setAutoReverse(false);
@@ -308,12 +309,12 @@ public class MainSceneController {
     }
 
     private ScaleTransition getNodeScaleTransition(Node node) {
-        ScaleTransition objTransition = new ScaleTransition(Duration.millis(1000), node);
-        objTransition.setCycleCount(10);
-        objTransition.setFromX(0.75);
-        objTransition.setToX(1);
-        objTransition.setFromY(0.75);
-        objTransition.setToY(1);
+        ScaleTransition objTransition = new ScaleTransition(Duration.millis(800), node);
+        objTransition.setCycleCount(2);
+        objTransition.setFromX(1);
+        objTransition.setToX(0.75);
+        objTransition.setFromY(1);
+        objTransition.setToY(0.75);
         objTransition.setAutoReverse(true);
         return objTransition;
     }
@@ -342,12 +343,16 @@ public class MainSceneController {
     public void processRequest(String command, String stringArg, Movie objArg) {
         LinkedHashSet<Movie> set = client.processUserRequest(command, stringArg, objArg);
         if (set != null) {
-            ObservableList<Movie> movieList = FXCollections.observableArrayList(set);
-            movieTable.setItems(movieList);
-            movieTable.getSelectionModel().clearSelection();
-            TableFilter.forTableView(movieTable).apply();
+            refreshData(set);
             refreshCanvas(false);
         }
+    }
+
+    public void refreshData(HashSet<Movie> set) {
+        ObservableList<Movie> movieList = FXCollections.observableArrayList(set);
+        movieTable.setItems(movieList);
+        movieTable.getSelectionModel().clearSelection();
+        TableFilter.forTableView(movieTable).apply();
     }
 
     public void processRequest(String command) {
@@ -415,9 +420,9 @@ public class MainSceneController {
     }
 
     public void languageChoiceBoxOnAction() {
-
         localization.setResourceBundle(ResourceBundle.getBundle("client.bundles.gui", sysLocales.get(languageChoiceBox.getValue())));
         setLanguage();
+        refreshCanvas(false);
     }
 
     public void setLocalization(Localization localization) {
@@ -477,10 +482,7 @@ public class MainSceneController {
         Pair<Boolean, HashSet<Movie>> result = client.processScript(selectedFile.getPath());
         if (result.getFirst()) {
 
-            ObservableList<Movie> movieList = FXCollections.observableArrayList(result.getSecond());
-            movieTable.setItems(movieList);
-            movieTable.getSelectionModel().clearSelection();
-            refreshCanvas(false);
+            refreshData(result.getSecond());
 
         }
     }
@@ -500,4 +502,6 @@ public class MainSceneController {
     private String getMovieInfoString(Movie m) {
         return String.format(localization.getStringBinding("MovieDisplay"), m.getName(), m.getOscarsCount(), m.getGoldenPalmCount(), m.getGenre(), m.getScreenwriter().getName());
     }
+
+
 }

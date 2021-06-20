@@ -8,18 +8,21 @@ import client.util.Localization;
 import client.util.ScriptProcessor;
 import client.util.UserElementGetter;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import shared.data.Movie;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -133,10 +136,32 @@ public class FXApp extends Application {
             primaryStage.setMinWidth(mainWindowScene.getWidth());
             primaryStage.setMinHeight(mainWindowScene.getHeight());
             primaryStage.setResizable(true);
+            runUpdateThread(mainWindowController);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void runUpdateThread(MainSceneController controller) {
+        Thread update = new Thread(() -> {
+            try {
+                while (true) {
+                    HashSet<Movie> updated = client.processUserRequest("refresh", "", null);
+                    if (updated != null) {
+
+                        Platform.runLater(() -> controller.refreshData(updated));
+                        Platform.runLater(() -> controller.refreshCanvas(false));
+                    }
+                    Thread.sleep(8000);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                Platform.exit();
+            }
+        });
+        update.setDaemon(true);
+        update.start();
     }
 
 
