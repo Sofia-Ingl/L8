@@ -53,6 +53,7 @@ public class MainSceneController {
     private Map<Integer, Shape> infoMap;
     private Random random;
     private Shape prevClicked = null;
+    private Movie prevChosen = null;
     private javafx.scene.paint.Color prevColor;
 
     @FXML
@@ -287,6 +288,10 @@ public class MainSceneController {
             infoMap.put(m.getId(), info);
             infoTextMap.put(m.getId(), infoText);
 
+            if (prevChosen!=null && m.getCreationDate().equals(prevChosen.getCreationDate())) {
+                shapeClicked(movieCircle);
+            }
+
             if (canvasIsChosen) {
 
                 TranslateTransition circleTransition = getNodeTranslateTransition(movieCircle, xTranslate, yTranslate);
@@ -324,6 +329,11 @@ public class MainSceneController {
     private void shapeOnMouseClicked(MouseEvent mouseEvent) {
 
         Shape shape = (Shape) mouseEvent.getSource();
+        shapeClicked(shape);
+
+    }
+
+    private void shapeClicked(Shape shape) {
         int id = shapeMap.get(shape);
         for (Movie m :
                 movieTable.getItems()) {
@@ -337,9 +347,9 @@ public class MainSceneController {
             prevClicked.setFill(prevColor);
         }
         prevClicked = shape;
+        prevChosen = movieTable.getSelectionModel().getSelectedItem();
         prevColor = (javafx.scene.paint.Color) shape.getFill();
         shape.setFill(prevColor.brighter());
-
     }
 
     public void processRequest(String command, String stringArg, Movie objArg) {
