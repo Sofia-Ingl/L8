@@ -131,6 +131,8 @@ public class MainSceneController {
         sysLocales = new HashMap<>();
         sysLocales.put("Русский", new Locale("ru", "RU"));
         sysLocales.put("English (Canada)", new Locale("en", "CA"));
+        sysLocales.put("Slovák", new Locale("sk", "SK"));
+        sysLocales.put("Shqiptare", new Locale("sq", "AL"));
         languageChoiceBox.setItems(FXCollections.observableArrayList(sysLocales.keySet()));
         shapeMap = new HashMap<>();
         textMap = new HashMap<>();

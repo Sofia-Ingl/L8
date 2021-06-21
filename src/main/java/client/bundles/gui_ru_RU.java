@@ -1,11 +1,5 @@
 package client.bundles;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-
 import java.util.ListResourceBundle;
 
 public class gui_ru_RU extends ListResourceBundle {
@@ -23,14 +17,12 @@ public class gui_ru_RU extends ListResourceBundle {
             {"RemoveGreaterError", "Ошибка при удалении больших элементов"},
             {"RemoveByScreenwriterError", "Ошибка при удалении элемента по сценаристу"},
             {"UpdateError", "Ошибка при обновлении элемента"},
-
             {"HelpMessage", "Справка:\n" +
                     "Внизу окна расположены кнопки взаимодействия с базой. " +
                     "Для выполнения действий по удалению или обновлению необходимо выбрать строку таблицы. " +
                     "Команда \"Очистить\" удаляет из БД лишь те объекты, что принадлежат вам.\n" +
                     "В разделе \"Визуализация\" вы найдете визуальное представление объектов БД."},
             {"InfoText", "Информация о коллекции:\n Тип хранимых объектов: %s \n Количество объектов: %s \n Время инициализации: %s \n"},
-
             {"idColumn", "Идентификатор"},
             {"nameColumn", "Название"},
             {"xColumn", "X"},
@@ -45,14 +37,12 @@ public class gui_ru_RU extends ListResourceBundle {
             {"eyeColorColumn", "Цвет глаз"},
             {"nationalityColumn", "Национальность"},
             {"ownerColumn", "Владелец"},
-
             {"visualTab", "Визуализация"},
             {"tableTab","Таблица"},
-
             {"addButton", "Добавить"},
             {"addIfMaxButton", "Добавить макс. элемент"},
             {"clearButton", "Очистить"},
-            {"executeScriptButton", "Исполнить скипт"},
+            {"executeScriptButton", "Исполнить скрипт"},
             {"gPalmsFilterButton", "Оставить фильмы с большим числом пальмовых ветвей"},
             {"helpButton", "Помощь"},
             {"historyButton", "История"},
@@ -62,19 +52,15 @@ public class gui_ru_RU extends ListResourceBundle {
             {"removeGreaterButton", "Удалить большие"},
             {"updateButton", "Обновить элемент"},
             {"refreshButton", "Обновить"},
-
             {"ConnectionError", "Ошибка соединения"},
             {"Disconnected", "Соединение не установлено..."},
             {"Connected", "Соединение установлено"},
-
             {"usernameLabel", "Логин"},
             {"passwordLabel", "Пароль"},
             {"registerCheckBox", "Регистрация"},
             {"signInButton", "Подтвердить"},
-
             {"WrongArgsError", "Не все аргументы допустимы. Проверьте корректность введенных данных"},
             {"ChoiceError", "Объект не выбран!"},
-
             {"History", "История (от новых к старым):"},
             {"add", "Добавить"},
             {"add_if_max", "Добавить макс. элемент"},
@@ -89,27 +75,12 @@ public class gui_ru_RU extends ListResourceBundle {
             {"remove_greater", "Удалить большие"},
             {"update", "Обновить элемент"},
             {"refresh", "Обновить"},
-
             {"AccessError", "Попытка обновить элемент, не принадлежащий пользователю!"},
             {"Error", "Ошибка!"},
             {"Info", "Информация"},
             {"NewTrial", "Пожалуйста, введите команду снова"},
-
             {"MovieDisplay", "Название: %s \nЧисло оскаров: %d \nЧисло пальмовых ветвей: %d \nЖанр: %s \nСценарист: %s"}
-            /*
-            "Movie{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", coordinates=" + coordinates.toString() +
-                ", creationDate=" + creationDate +
-                ", oscarsCount=" + oscarsCount +
-                ", goldenPalmCount=" + goldenPalmCount +
-                ", tagline='" + tagline + '\'' +
-                ", genre=" + genre +
-                ", screenwriter=" + screenwriter +
-                ", owner=" + owner.getLogin() +
-                '}';
-             */
+
 
     };
 
