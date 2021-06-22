@@ -22,7 +22,7 @@ public class gui_sk_SK extends ListResourceBundle {
                     "Aby bolo možné vykonať odstránenie alebo upgrade, musíte vybrať riadok tabuľky." +
                     "Príkaz \"Jasný\" odstraňuje z databázy iba tie objekty, ktoré patria k tebe. \n" +
                     "V \"Vizualizácia \" nájdete vizuálnu reprezentáciu databázových objektov."},
-            {"InfoText", "Informácie o zbierke: \n Typ uložených predmetov: %s \n je počet objektov: %s \n dobe inicializácia: %s \n"},
+            {"InfoText", "Informácie o zbierke: \nTyp uložených predmetov: %s \nJe počet objektov: %s \nDobe inicializácia: %s"},
             {"idColumn", "ID"},
             {"nameColumn", "Názov"},
             {"xColumn", "X"},

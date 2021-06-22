@@ -22,7 +22,7 @@ public class gui_sq_AL extends ListResourceBundle {
                     "Për të kryer largimin apo përmirësuar, ju duhet të zgjidhni rresht tryezë." +
                     "E \"I pastër\" largon nga bazën e të dhënave vetëm ato objekte që i përkasin për ju. \n" +
                     "Në \"Vizualizimi\" ju do të gjeni një përfaqësim pamor të objekteve të bazës së të dhënave."},
-            {"InfoText", "Informacion në lidhje me mbledhjen: \n Lloji të objekteve të ruajtura: %s \n Numrin e objekteve: %s \n Kohë initialization: %s \n"},
+            {"InfoText", "Informacion në lidhje me mbledhjen: \nLloji të objekteve të ruajtura: %s \nNumrin e objekteve: %s \nKohë initialization: %s"},
             {"idColumn", "ID"},
             {"nameColumn", "Emri"},
             {"xColumn", "X"},

@@ -24,7 +24,8 @@ public class Info extends UserCommand {
 
         container.addResultArg(storage.getTypes()[1].getTypeName());
         container.addResultArg(String.valueOf(storage.getCollection().size()));
-        container.addResultArg(storage.getInitTime().format(DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss")));
+        //container.addResultArg(storage.getInitTime().format(DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss")));
+        container.addResultArg(storage.getInitTime().toString());
         /*
         info = "\n" + "ИНФОРМАЦИЯ О КОЛЛЕКЦИИ" + "\n"
                 + "Тип коллекции: " + storage.getTypes()[0] + ", тип хранимых объектов: " + storage.getTypes()[1] + "\n"

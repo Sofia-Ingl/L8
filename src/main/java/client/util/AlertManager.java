@@ -4,6 +4,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import shared.serializable.ServerResponse;
 
+import java.text.MessageFormat;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class AlertManager {
@@ -46,11 +50,11 @@ public class AlertManager {
             body = body + "\n" + bodyArgs;
         }
         if (command.equals("info")) {
-            System.out.println(response.getResponseBodyArgs().size());
             String type = response.getResponseBodyArgs().get(0);
             String size = response.getResponseBodyArgs().get(1);
-            String initTime = response.getResponseBodyArgs().get(2);
-            body = String.format(localization.getResourceBundle().getLocale(), body, type, size, initTime);
+            LocalDateTime initTime = LocalDateTime.parse(response.getResponseBodyArgs().get(2));
+            String initTimeString = initTime.format(DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss", localization.getResourceBundle().getLocale()));
+            body = String.format(localization.getResourceBundle().getLocale(), body, type, size, initTimeString);
         }
         commandMessage(command, body);
     }

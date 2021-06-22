@@ -26,7 +26,7 @@ public class gui_en_CA extends ListResourceBundle {
                     "To perform deletion or update actions, you must select a table row." +
                     "The \" Clear \"command removes from the database only those objects that belong to you. \n" +
                     "In the \" Visualization \"section, you will find a visual representation of the database objects."},
-            {"InfoText", "Collection info:\n Object type: %s \n Size: %s \n Init time: %s \n"},
+            {"InfoText", "Collection info:\nObject type: %s \nSize: %s \nInit time: %s"},
 
             {"idColumn", "Id"},
             {"nameColumn", "Name"},
