@@ -5,6 +5,8 @@ import shared.serializable.User;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -94,8 +96,9 @@ public class Movie implements Comparable<Movie>, Serializable {
         this.creationDate = creationDate;
     }
 
-    public String getCreationDateString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss z");
+    public String getCreationDateString(Locale locale) {
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss z");
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL).withLocale(locale);
         return creationDate.format(formatter);
     }
 

@@ -40,7 +40,7 @@
                                                 <TableColumn fx:id="nameColumn" minWidth="80.0" maxWidth="180" text="MovieName" />
                                                 <TableColumn fx:id="xColumn" minWidth="80.0" maxWidth="80" text="XCoordinate" />
                                                 <TableColumn fx:id="yColumn" minWidth="80.0" maxWidth="80" text="YCoordinate" />
-                                                <TableColumn fx:id="creationDateColumn" minWidth="80.0" maxWidth="280" text="CreationDate" />
+                                                <TableColumn fx:id="creationDateColumn" minWidth="80.0" maxWidth="320" text="CreationDate" />
                                                 <TableColumn fx:id="oscarsColumn" minWidth="80.0" maxWidth="80" text="Oscars" />
                                                 <TableColumn fx:id="gPalmsColumn" minWidth="80.0" maxWidth="80" text="GoldenPalms" />
                                                 <TableColumn fx:id="taglineColumn" minWidth="80.0" maxWidth="80" text="TagLine" />

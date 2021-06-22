@@ -27,7 +27,7 @@ public class gui_sq_AL extends ListResourceBundle {
             {"nameColumn", "Emri"},
             {"xColumn", "X"},
             {"yColumn", "Y"},
-            {"creationDateColumn", "krijuar"},
+            {"creationDateColumn", "Krijuar"},
             {"oscarsColumn", "Oscars"},
             {"gPalmsColumn", "Palma"},
             {"taglineColumn", "Tags"},
