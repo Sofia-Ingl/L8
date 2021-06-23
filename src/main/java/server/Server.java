@@ -40,7 +40,7 @@ public class Server implements Runnable {
         refreshCommand.setWrittenToHistory(false);
         UserCommand[] userCommands = {refreshCommand, new Help(), new History(), new Clear(), new Add(), new ExecuteScript(),
                 new Info(), new AddIfMax(), new RemoveAllByScreenwriter(),
-                new RemoveById(), new RemoveGreater(), new Update(), new Exit()};
+                new RemoveById(), new RemoveGreater(), new Update()};
 
 
         Server server = new Server(databaseAddrUserAndPort.getSecond(), new CommandWrapper(collectionStorage, databaseCollectionHandler, userHandler, userCommands, innerServerCommands));
