@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8.0.292" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.MainSceneController">
+<AnchorPane prefHeight="800.0" prefWidth="1650.0" xmlns="http://javafx.com/javafx/8.0.292" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.MainSceneController">
 
         <VBox fx:id="vBox" prefHeight="700.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
@@ -36,20 +36,20 @@
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="1400.0">
                                         <TableView fx:id="movieTable" prefHeight="516.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columns>
-                                                <TableColumn fx:id="idColumn" minWidth="80.0" maxWidth="80" text="MovieId" />
-                                                <TableColumn fx:id="nameColumn" minWidth="80.0" maxWidth="180" text="MovieName" />
-                                                <TableColumn fx:id="xColumn" minWidth="80.0" maxWidth="80" text="XCoordinate" />
-                                                <TableColumn fx:id="yColumn" minWidth="80.0" maxWidth="80" text="YCoordinate" />
-                                                <TableColumn fx:id="creationDateColumn" minWidth="80.0" maxWidth="320" text="CreationDate" />
-                                                <TableColumn fx:id="oscarsColumn" minWidth="80.0" maxWidth="80" text="Oscars" />
-                                                <TableColumn fx:id="gPalmsColumn" minWidth="80.0" maxWidth="80" text="GoldenPalms" />
-                                                <TableColumn fx:id="taglineColumn" minWidth="80.0" maxWidth="80" text="TagLine" />
-                                                <TableColumn fx:id="genreColumn" minWidth="80.0" maxWidth="80" text="Genre" />
-                                                <TableColumn fx:id="scrNameColumn" minWidth="80.0" maxWidth="180" text="Screenwriter" />
-                                                <TableColumn fx:id="scrHeightColumn" minWidth="80.0" maxWidth="80" text="ScrHeight" />
-                                                <TableColumn fx:id="eyeColorColumn" minWidth="80.0" maxWidth="80" text="ScrEyeColor" />
-                                                <TableColumn fx:id="nationalityColumn" minWidth="80.0" maxWidth="80" text="ScrNationality" />
-                                                <TableColumn fx:id="ownerColumn" maxWidth="120" minWidth="80.0" text="Owner" />
+                                                <TableColumn fx:id="idColumn" minWidth="80.0" text="MovieId" />
+                                                <TableColumn fx:id="nameColumn" minWidth="80.0" text="MovieName" />
+                                                <TableColumn fx:id="xColumn" minWidth="80.0" text="XCoordinate" />
+                                                <TableColumn fx:id="yColumn" minWidth="80.0" text="YCoordinate" />
+                                                <TableColumn fx:id="creationDateColumn" minWidth="80.0" text="CreationDate" />
+                                                <TableColumn fx:id="oscarsColumn" minWidth="80.0" text="Oscars" />
+                                                <TableColumn fx:id="gPalmsColumn" minWidth="80.0" text="GoldenPalms" />
+                                                <TableColumn fx:id="taglineColumn" minWidth="80.0" text="TagLine" />
+                                                <TableColumn fx:id="genreColumn" minWidth="80.0" text="Genre" />
+                                                <TableColumn fx:id="scrNameColumn" minWidth="80.0" text="Screenwriter" />
+                                                <TableColumn fx:id="scrHeightColumn" minWidth="80.0" text="ScrHeight" />
+                                                <TableColumn fx:id="eyeColorColumn" minWidth="80.0" text="ScrEyeColor" />
+                                                <TableColumn fx:id="nationalityColumn" minWidth="80.0" text="ScrNationality" />
+                                                <TableColumn fx:id="ownerColumn" minWidth="80.0" text="Owner" />
                                             </columns>
                                             <columnResizePolicy>
                                                 <TableView fx:constant="UNCONSTRAINED_RESIZE_POLICY" />
