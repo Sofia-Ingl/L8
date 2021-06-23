@@ -68,6 +68,11 @@ public class FXApp extends Application {
 
     }
 
+    @Override
+    public void stop() {
+        client.stop();
+    }
+
     private void setStageStyle(Stage stage) {
         stage.setTitle("Movie Application");
         InputStream iconStream = getClass().getResourceAsStream("/client/images/34.png");

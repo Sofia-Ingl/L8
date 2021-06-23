@@ -188,4 +188,11 @@ public class Client {
         this.scriptProcessor = scriptProcessor;
         scriptProcessor.setClient(this);
     }
+
+    public void stop() {
+        try {
+            selector.close();
+            socketChannel.close();
+        } catch (IOException ignored) {}
+    }
 }
