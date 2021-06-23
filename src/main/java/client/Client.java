@@ -96,7 +96,8 @@ public class Client {
             try {
                 resetConnection();
                 reAuthorisation();
-                AlertManager.displayInfo("NewTrial");
+                return processUserRequest(command, commandArg, obj);
+                //AlertManager.displayInfo("NewTrial");
             } catch (IOException exception) {
                 AlertManager.displayError("ConnectionError");
             }

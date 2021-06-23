@@ -130,6 +130,7 @@ public class MainSceneController {
 
     public void initialize() {
         initTable();
+        setSelectionReaction();
         sysLocales = new HashMap<>();
         sysLocales.put("Русский", new Locale("ru", "RU"));
         sysLocales.put("English (Canada)", new Locale("en", "CA"));
@@ -145,6 +146,16 @@ public class MainSceneController {
         fileChooser.setInitialDirectory(new File("."));
         random = new Random(17);
 
+    }
+
+    private void setSelectionReaction() {
+        movieTable.getSelectionModel().selectedItemProperty().addListener((observable, oldVal, newVal)->
+        {
+            for (Shape s:
+                 shapeMap.keySet()) {
+                if (newVal!=null && shapeMap.get(s) == newVal.getId()) shapeClicked(s);
+            }
+        });
     }
 
     private void initTable() {
@@ -362,6 +373,7 @@ public class MainSceneController {
     }
 
     public void refreshData(HashSet<Movie> set) {
+
         ObservableList<Movie> movieList = FXCollections.observableArrayList(set);
         movieTable.setItems(movieList);
         movieTable.getSelectionModel().clearSelection();
